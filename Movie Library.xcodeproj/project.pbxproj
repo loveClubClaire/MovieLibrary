@@ -11,6 +11,7 @@
 		C0464C3920C4C4FF006C984D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0464C3820C4C4FF006C984D /* Assets.xcassets */; };
 		C0464C3C20C4C4FF006C984D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0464C3A20C4C4FF006C984D /* MainMenu.xib */; };
 		C0464C4820C4C4FF006C984D /* Movie_LibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0464C4720C4C4FF006C984D /* Movie_LibraryTests.swift */; };
+		C0464C5720D1D217006C984D /* MovieDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0464C5620D1D217006C984D /* MovieDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		C0464C4320C4C4FF006C984D /* Movie LibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Movie LibraryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0464C4720C4C4FF006C984D /* Movie_LibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie_LibraryTests.swift; sourceTree = "<group>"; };
 		C0464C4920C4C4FF006C984D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0464C5620D1D217006C984D /* MovieDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				C0464C3620C4C4FD006C984D /* AppDelegate.swift */,
+				C0464C5220D1D054006C984D /* UI */,
 				C0464C3820C4C4FF006C984D /* Assets.xcassets */,
 				C0464C3A20C4C4FF006C984D /* MainMenu.xib */,
 				C0464C3D20C4C4FF006C984D /* Info.plist */,
@@ -90,6 +93,22 @@
 				C0464C4920C4C4FF006C984D /* Info.plist */,
 			);
 			path = "Movie LibraryTests";
+			sourceTree = "<group>";
+		};
+		C0464C5220D1D054006C984D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C0464C5320D1D05C006C984D /* NSTableView's */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C0464C5320D1D05C006C984D /* NSTableView's */ = {
+			isa = PBXGroup;
+			children = (
+				C0464C5620D1D217006C984D /* MovieDisplay.swift */,
+			);
+			path = "NSTableView's";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0464C3720C4C4FD006C984D /* AppDelegate.swift in Sources */,
+				C0464C5720D1D217006C984D /* MovieDisplay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
