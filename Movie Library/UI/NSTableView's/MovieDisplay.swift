@@ -10,9 +10,14 @@ import Cocoa
 
 class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
 
-    let tempData = ["A","B","C","D","E"]
+    @IBOutlet weak var tableView: NSTableView!
     
+    var tempData = ["A","B","Q","D","E"]
     
+    //Called by AppDelegate after application has finished launching. Think of this function as an initalization function
+    func viewDidLoad(){
+        
+    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return 5;
@@ -32,10 +37,6 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
     
         // return the populated NSTableCellView
         return cellView
-    }
-    
-    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-        
     }
     
 }

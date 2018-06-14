@@ -12,9 +12,14 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <customObject id="GD9-0p-DSE" customClass="MovieDisplay" customModule="Movie_Library" customModuleProvider="target"/>
+        <customObject id="GD9-0p-DSE" customClass="MovieDisplay" customModule="Movie_Library" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="x8t-Bf-Qhr" id="mZW-pg-pAW"/>
+            </connections>
+        </customObject>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Movie_Library" customModuleProvider="target">
             <connections>
+                <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="ffQ-LS-ziP"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
