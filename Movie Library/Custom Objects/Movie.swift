@@ -19,6 +19,11 @@ class Movie: NSObject, NSCoding {
     var lastPlayed: NSDate?
     var filepath: URL?
     
+    init(aName: String, aFilepath: URL) {
+        name = aName
+        filepath = aFilepath
+    }
+    
     //Encoding fucntion for saving. Encode each object with a key for retervial
     func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")

@@ -12,7 +12,7 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
 
     @IBOutlet weak var tableView: NSTableView!
     
-    var tempData = ["A","B","Q","D","E"]
+    var movieData: [Movie] = []
     
     //Called by AppDelegate after application has finished launching. Think of this function as an initalization function
     func viewDidLoad(){
@@ -20,7 +20,7 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 5;
+        return movieData.count;
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -32,8 +32,9 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         
         if identifier == "name" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "NameCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = tempData[row]
+            cellView!.textField?.stringValue = movieData[row].name!
         }
+        
     
         // return the populated NSTableCellView
         return cellView

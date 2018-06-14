@@ -23,6 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    @IBAction func addMovieMenuItemSelected(_ sender: Any) {
+        if let newMovie = MenuBar.addMovie(){
+            MovieDisplayObject.movieData.append(newMovie)
+        }        
+    }
 
 }
 
