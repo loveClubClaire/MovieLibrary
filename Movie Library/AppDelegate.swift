@@ -12,11 +12,13 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
+    @IBOutlet weak var MetadataWindow: MovieMetadataWindow!
     @IBOutlet weak var window: NSWindow!
 
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         MovieDisplayObject.viewDidLoad()
+        MetadataWindow.spawnMovieMetadataWindow()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -26,7 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func addMovieMenuItemSelected(_ sender: Any) {
         if let newMovie = MenuBar.addMovie(){
             MovieDisplayObject.movieData.append(newMovie)
-        }        
+            MovieDisplayObject.tableView.reloadData()
+        }
     }
 
 }
