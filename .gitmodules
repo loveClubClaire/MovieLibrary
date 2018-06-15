@@ -1,6 +1,3 @@
 [submodule "Movie Library/DragDropDemo"]
 	path = Movie Library/DragDropDemo
 	url = git@github.com:phaibin/DragDropDemo.git
-[submodule "extras"]
-	path = extras
-	url = git://github.com/kanzure/pokemon-reverse-engineering-tools.git
