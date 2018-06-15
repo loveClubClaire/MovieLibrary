@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var MetadataWindow: MovieMetadataWindow!
     @IBOutlet weak var window: NSWindow!
 
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         MovieDisplayObject.viewDidLoad()
         MetadataWindow.spawnMovieMetadataWindow()

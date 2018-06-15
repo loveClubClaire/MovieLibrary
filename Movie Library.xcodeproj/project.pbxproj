@@ -15,6 +15,14 @@
 		C0464C5A20D2052E006C984D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0464C5920D2052E006C984D /* Movie.swift */; };
 		C0464C5C20D209D3006C984D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0464C5B20D209D3006C984D /* MenuBar.swift */; };
 		C0464C5E20D23083006C984D /* MovieMetadataWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0464C5D20D23083006C984D /* MovieMetadataWindow.swift */; };
+		C0464C8F20D373B2006C984D /* NSImage+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0464C8E20D373B2006C984D /* NSImage+Extention.swift */; };
+		C0464CF620D40518006C984D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C0464CE020D40518006C984D /* README.md */; };
+		C0464CF720D40518006C984D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0464CE220D40518006C984D /* InfoPlist.strings */; };
+		C0464CF820D40518006C984D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C0464CE420D40518006C984D /* Credits.rtf */; };
+		C0464CFB20D40518006C984D /* DragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0464CEC20D40518006C984D /* DragDropImageView.m */; };
+		C0464CFC20D40518006C984D /* DragDropDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */; };
+		C0464CFD20D40518006C984D /* DragDropDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */; };
+		C0464CFE20D40518006C984D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C0464CF220D40518006C984D /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +49,19 @@
 		C0464C5920D2052E006C984D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C0464C5B20D209D3006C984D /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		C0464C5D20D23083006C984D /* MovieMetadataWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMetadataWindow.swift; sourceTree = "<group>"; };
+		C0464C8E20D373B2006C984D /* NSImage+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extention.swift"; sourceTree = "<group>"; };
+		C0464CE020D40518006C984D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C0464CE320D40518006C984D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C0464CE520D40518006C984D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		C0464CE820D40518006C984D /* DragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragDropImageView.h; sourceTree = "<group>"; };
+		C0464CE920D40518006C984D /* DragDropDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragDropDemoAppDelegate.h; sourceTree = "<group>"; };
+		C0464CEA20D40518006C984D /* DragDropDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DragDropDemo-Prefix.pch"; sourceTree = "<group>"; };
+		C0464CEB20D40518006C984D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C0464CEC20D40518006C984D /* DragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropImageView.m; sourceTree = "<group>"; };
+		C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropDemoAppDelegate.m; sourceTree = "<group>"; };
+		C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DragDropDemo-Info.plist"; sourceTree = "<group>"; };
+		C0464CF220D40518006C984D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		C0464D0320D40595006C984D /* Movie Library-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Movie Library-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +85,8 @@
 		C0464C2A20C4C4FD006C984D = {
 			isa = PBXGroup;
 			children = (
+				C0464D0320D40595006C984D /* Movie Library-Bridging-Header.h */,
+				C0464CDF20D40518006C984D /* DragDropDemo */,
 				C0464C3520C4C4FD006C984D /* Movie Library */,
 				C0464C4620C4C4FF006C984D /* Movie LibraryTests */,
 				C0464C3420C4C4FD006C984D /* Products */,
@@ -86,6 +109,7 @@
 				C0464C5B20D209D3006C984D /* MenuBar.swift */,
 				C0464C5820D20512006C984D /* Custom Objects */,
 				C0464C5220D1D054006C984D /* UI */,
+				C0464C8D20D3737E006C984D /* Extentions */,
 				C0464C3820C4C4FF006C984D /* Assets.xcassets */,
 				C0464C3A20C4C4FF006C984D /* MainMenu.xib */,
 				C0464C3D20C4C4FF006C984D /* Info.plist */,
@@ -126,6 +150,41 @@
 				C0464C5920D2052E006C984D /* Movie.swift */,
 			);
 			path = "Custom Objects";
+			sourceTree = "<group>";
+		};
+		C0464C8D20D3737E006C984D /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				C0464C8E20D373B2006C984D /* NSImage+Extention.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		C0464CDF20D40518006C984D /* DragDropDemo */ = {
+			isa = PBXGroup;
+			children = (
+				C0464CE020D40518006C984D /* README.md */,
+				C0464CE120D40518006C984D /* DragDropDemo */,
+				C0464CF220D40518006C984D /* .gitignore */,
+			);
+			name = DragDropDemo;
+			path = "Movie Library/DragDropDemo";
+			sourceTree = "<group>";
+		};
+		C0464CE120D40518006C984D /* DragDropDemo */ = {
+			isa = PBXGroup;
+			children = (
+				C0464CE220D40518006C984D /* InfoPlist.strings */,
+				C0464CE420D40518006C984D /* Credits.rtf */,
+				C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */,
+				C0464CE920D40518006C984D /* DragDropDemoAppDelegate.h */,
+				C0464CEA20D40518006C984D /* DragDropDemo-Prefix.pch */,
+				C0464CEB20D40518006C984D /* main.m */,
+				C0464CEC20D40518006C984D /* DragDropImageView.m */,
+				C0464CE820D40518006C984D /* DragDropImageView.h */,
+				C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */,
+			);
+			path = DragDropDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +237,7 @@
 				TargetAttributes = {
 					C0464C3220C4C4FD006C984D = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 					C0464C4220C4C4FF006C984D = {
 						CreatedOnToolsVersion = 9.3;
@@ -209,6 +269,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0464CFE20D40518006C984D /* .gitignore in Resources */,
+				C0464CF820D40518006C984D /* Credits.rtf in Resources */,
+				C0464CF620D40518006C984D /* README.md in Resources */,
+				C0464CFD20D40518006C984D /* DragDropDemo-Info.plist in Resources */,
+				C0464CF720D40518006C984D /* InfoPlist.strings in Resources */,
 				C0464C3920C4C4FF006C984D /* Assets.xcassets in Resources */,
 				C0464C3C20C4C4FF006C984D /* MainMenu.xib in Resources */,
 			);
@@ -231,8 +296,11 @@
 				C0464C5E20D23083006C984D /* MovieMetadataWindow.swift in Sources */,
 				C0464C3720C4C4FD006C984D /* AppDelegate.swift in Sources */,
 				C0464C5720D1D217006C984D /* MovieDisplay.swift in Sources */,
+				C0464C8F20D373B2006C984D /* NSImage+Extention.swift in Sources */,
 				C0464C5C20D209D3006C984D /* MenuBar.swift in Sources */,
 				C0464C5A20D2052E006C984D /* Movie.swift in Sources */,
+				C0464CFC20D40518006C984D /* DragDropDemoAppDelegate.m in Sources */,
+				C0464CFB20D40518006C984D /* DragDropImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +329,22 @@
 				C0464C3B20C4C4FF006C984D /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		C0464CE220D40518006C984D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0464CE320D40518006C984D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C0464CE420D40518006C984D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0464CE520D40518006C984D /* en */,
+			);
+			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -383,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Movie Library/Movie_Library.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -393,6 +478,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "sixteensquared.Movie-Library";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/zachwhitten/Documents/Xcode Projects/macOS Projects/Movie Library/Movie Library-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -401,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Movie Library/Movie_Library.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -411,6 +499,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "sixteensquared.Movie-Library";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/zachwhitten/Documents/Xcode Projects/macOS Projects/Movie Library/Movie Library-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

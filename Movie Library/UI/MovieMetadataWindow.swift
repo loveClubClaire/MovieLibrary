@@ -19,8 +19,7 @@ class MovieMetadataWindow: NSObject {
     
     
     func spawnMovieMetadataWindow(){
-        //Code to round the edges of the Metadata Window
-        //TODO, determine if you want this here or somehwere else 
+        //Configures the window so that it's edges are rounded. To change the intensity of the curve, modify the cornerRadius property 
         MetadataWindow.contentView?.wantsLayer = true;
         MetadataWindow.contentView?.layer?.cornerRadius = 5.0
         MetadataWindow.contentView?.layer?.backgroundColor = .white
