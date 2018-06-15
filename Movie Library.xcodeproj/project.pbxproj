@@ -22,7 +22,6 @@
 		C0464CFB20D40518006C984D /* DragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0464CEC20D40518006C984D /* DragDropImageView.m */; };
 		C0464CFC20D40518006C984D /* DragDropDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */; };
 		C0464CFD20D40518006C984D /* DragDropDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */; };
-		C0464CFE20D40518006C984D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C0464CF220D40518006C984D /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +59,6 @@
 		C0464CEC20D40518006C984D /* DragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropImageView.m; sourceTree = "<group>"; };
 		C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropDemoAppDelegate.m; sourceTree = "<group>"; };
 		C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DragDropDemo-Info.plist"; sourceTree = "<group>"; };
-		C0464CF220D40518006C984D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0464D0320D40595006C984D /* Movie Library-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Movie Library-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,7 +163,6 @@
 			children = (
 				C0464CE020D40518006C984D /* README.md */,
 				C0464CE120D40518006C984D /* DragDropDemo */,
-				C0464CF220D40518006C984D /* .gitignore */,
 			);
 			name = DragDropDemo;
 			path = "Movie Library/DragDropDemo";
@@ -269,7 +266,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0464CFE20D40518006C984D /* .gitignore in Resources */,
 				C0464CF820D40518006C984D /* Credits.rtf in Resources */,
 				C0464CF620D40518006C984D /* README.md in Resources */,
 				C0464CFD20D40518006C984D /* DragDropDemo-Info.plist in Resources */,
