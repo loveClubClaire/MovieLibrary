@@ -14,6 +14,7 @@ class MovieMetadataWindow: NSObject {
     @IBOutlet weak var MetadataCustomView: NSView!
     @IBOutlet weak var DetailsView: NSView!
     @IBOutlet weak var ArtworkView: NSView!
+    @IBOutlet weak var FileView: NSView!
     @IBOutlet weak var SegControl: NSSegmentedControl!
     
     
@@ -27,7 +28,8 @@ class MovieMetadataWindow: NSObject {
         MetadataWindow.backgroundColor = .clear
         MetadataWindow.titlebarAppearsTransparent = true
         MetadataWindow.titleVisibility = .hidden
-        
+        //Configures a default view 
+        MetadataCustomView.addSubview(DetailsView)
     }
     
     
@@ -39,10 +41,9 @@ class MovieMetadataWindow: NSObject {
         else if SegControl.selectedSegment == 1{
             MetadataCustomView.addSubview(ArtworkView)
         }
-        else{
-            
+        else if SegControl.selectedSegment == 2{
+            MetadataCustomView.addSubview(FileView)
         }
-        
     }
     
     
