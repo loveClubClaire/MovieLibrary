@@ -699,11 +699,20 @@
                                     <action selector="addMovieMenuItemSelected:" target="-1" id="TGU-da-9KE"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Delete" id="GPv-Iy-qXc">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="deleteMovieMenuItemSelected:" target="Voe-Tx-rLC" id="BwY-9M-zbH"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="68" y="145"/>
+            <point key="canvasLocation" x="-30" y="226"/>
         </menu>
         <window title="Movie Library" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
