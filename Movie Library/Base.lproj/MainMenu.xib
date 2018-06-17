@@ -850,6 +850,7 @@ CA
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
+                                        <action selector="TableViewClicked:" target="GD9-0p-DSE" id="Ka2-iO-O4P"/>
                                         <outlet property="dataSource" destination="GD9-0p-DSE" id="fr9-o5-Nec"/>
                                         <outlet property="delegate" destination="GD9-0p-DSE" id="qKs-QF-Rq5"/>
                                     </connections>

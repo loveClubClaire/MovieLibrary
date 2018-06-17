@@ -74,7 +74,16 @@ class MovieMetadataWindow: NSObject {
     @IBAction func OkButtonPressed(_ sender: Any) {
         //Store values
         let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
+        aMovie.title = titleTextField.stringValue
+        aMovie.director = directorTextField.stringValue
+        aMovie.genre = genereTextField.stringValue
+        aMovie.year = yearTextField.stringValue == "" ? nil : Int(yearTextField.stringValue)
+        //TODO runTimeLabel.stringValue
+        aMovie.comments = commentsTextField.stringValue
         
+        //Save the updated data
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: appDelegate.storedMoviesFilepath)
         //StopModal and orderout window
         NSApp.stopModal()
         MetadataWindow.orderOut(self)
