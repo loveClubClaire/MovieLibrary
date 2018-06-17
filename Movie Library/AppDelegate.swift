@@ -43,11 +43,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func addMovieMenuItemSelected(_ sender: Any) {
-        if let newMovie = MenuBar.addMovie(){
+        let newMovies = MenuBar.addMovie()
+        for newMovie in newMovies{
             MovieDisplayObject.movieData.append(newMovie)
-            NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
-            MovieDisplayObject.tableView.reloadData()
         }
+        NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
+        MovieDisplayObject.tableView.reloadData()
     }
     
     @IBAction func deleteMovieMenuItemSelected(_ sender: Any) {

@@ -10,19 +10,21 @@ import Cocoa
 
 class MenuBar: NSObject {
     
-    static func addMovie() -> Movie?{
-        var newMovie: Movie?
+    static func addMovie() -> [Movie]{
+        var newMovies: [Movie] = []
         let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = ["3gp","asf","wmv","au","avi","flv","mov","mp4","ogm","ogg","mkv","mka","ts","mpg","mpg","mp3","mp2","nsc","nsv","nut","a52","dts","aac","flac","dv","vid","tta","tac","ty","wav","dts","xa","m4v"]
-        openPanel.allowsMultipleSelection = false
+        openPanel.allowsMultipleSelection = true
         openPanel.canChooseDirectories = false
         openPanel.canChooseFiles = true
         let result = openPanel.runModal()
         if result == NSApplication.ModalResponse.OK {
-            let filepath = openPanel.url!
-            newMovie = Movie(aName: filepath.lastPathComponent, aFilepath: filepath)
+            for aURL in openPanel.urls{
+                let newMovie = Movie(aName: aURL.lastPathComponent, aFilepath: aURL)
+                newMovies.append(newMovie)
+            }
         }
-        return newMovie
+        return newMovies
     }
     
     
