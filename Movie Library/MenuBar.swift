@@ -20,7 +20,7 @@ class MenuBar: NSObject {
         let result = openPanel.runModal()
         if result == NSApplication.ModalResponse.OK {
             for aURL in openPanel.urls{
-                let newMovie = Movie(aName: aURL.lastPathComponent, aFilepath: aURL)
+                let newMovie = Movie(aTitle: aURL.lastPathComponent, aFilepath: aURL)
                 newMovies.append(newMovie)
             }
         }

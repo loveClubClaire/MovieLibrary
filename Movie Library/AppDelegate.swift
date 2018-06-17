@@ -35,7 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         MovieDisplayObject.viewDidLoad()
-        MetadataWindow.spawnMovieMetadataWindow()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -57,6 +56,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         MovieDisplayObject.tableView.reloadData()
     }
     
-
+    @IBAction func editMovieMenuItemSelected(_ sender: Any) {
+        MetadataWindow.spawnMovieMetadataWindow()
+    }
+    
 }
 

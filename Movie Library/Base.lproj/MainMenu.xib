@@ -24,7 +24,15 @@
                 <outlet property="FileView" destination="2JZ-rG-XwW" id="dXi-UD-XzQ"/>
                 <outlet property="MetadataCustomView" destination="fdy-ZA-HrG" id="8VE-CN-IDR"/>
                 <outlet property="MetadataWindow" destination="Rno-x4-aVr" id="KOe-cZ-C4B"/>
+                <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="bdQ-pN-yIi"/>
                 <outlet property="SegControl" destination="fr5-hP-HgN" id="dpB-rP-VBM"/>
+                <outlet property="commentsTextField" destination="ylw-sO-ycx" id="PYO-Wy-zhe"/>
+                <outlet property="directorTextField" destination="cHl-44-lEI" id="2Rj-jH-hVR"/>
+                <outlet property="genereTextField" destination="vFl-Mg-SVb" id="cN0-rh-iYS"/>
+                <outlet property="playCountLabel" destination="mbe-S0-4iM" id="WJG-v2-Kj7"/>
+                <outlet property="runTimeLabel" destination="2IQ-dG-CfL" id="zHH-UQ-8qe"/>
+                <outlet property="titleTextField" destination="9Sg-bg-nn8" id="mTS-na-Bqk"/>
+                <outlet property="yearTextField" destination="hD4-nb-OxO" id="TRe-J8-UwC"/>
             </connections>
         </customObject>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Movie_Library" customModuleProvider="target">
@@ -708,6 +716,11 @@ CA
                                     <action selector="deleteMovieMenuItemSelected:" target="Voe-Tx-rLC" id="BwY-9M-zbH"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Edit" keyEquivalent="E" id="tLz-LD-lZK">
+                                <connections>
+                                    <action selector="editMovieMenuItemSelected:" target="Voe-Tx-rLC" id="H6Q-5X-ru3"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -727,7 +740,7 @@ CA
                         <rect key="frame" x="0.0" y="0.0" width="650" height="467"/>
                         <clipView key="contentView" id="zGL-QO-i38">
                             <rect key="frame" x="1" y="0.0" width="648" height="466"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="E68-rs-VvL" viewBased="YES" id="x8t-Bf-Qhr">
                                     <rect key="frame" x="0.0" y="0.0" width="648" height="443"/>
@@ -736,8 +749,8 @@ CA
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="name" width="116" minWidth="40" maxWidth="1000" id="kgk-je-8nF">
-                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
+                                        <tableColumn identifier="title" width="116" minWidth="40" maxWidth="1000" id="kgk-je-8nF">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Title">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -749,7 +762,7 @@ CA
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
-                                                <tableCellView identifier="NameCell" id="6sp-GV-Em7">
+                                                <tableCellView identifier="TitleCell" id="6sp-GV-Em7">
                                                     <rect key="frame" x="1" y="1" width="116" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
@@ -866,7 +879,8 @@ CA
             </view>
             <point key="canvasLocation" x="145" y="-166.5"/>
         </window>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="Rno-x4-aVr">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Rno-x4-aVr">
+            <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="420" height="560"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -901,6 +915,9 @@ CA
 DQ
 </string>
                         </buttonCell>
+                        <connections>
+                            <action selector="OkButtonPressed:" target="1ST-e2-ka0" id="Kx1-6i-Zsq"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-n2-XgD">
                         <rect key="frame" x="202" y="13" width="102" height="32"/>
@@ -914,6 +931,9 @@ DQ
 Gw
 </string>
                         </buttonCell>
+                        <connections>
+                            <action selector="CancelButtonPressed:" target="1ST-e2-ka0" id="E8d-ca-V69"/>
+                        </connections>
                     </button>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdy-ZA-HrG">
                         <rect key="frame" x="0.0" y="49" width="420" height="460"/>
@@ -1027,15 +1047,6 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lEg-9x-Ovo">
-                    <rect key="frame" x="26" y="272" width="74" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Last Played" id="3LN-2C-N7u">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kOZ-Bu-2Tm">
                     <rect key="frame" x="39" y="297" width="61" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1058,6 +1069,15 @@ Gw
                     <rect key="frame" x="30" y="247" width="70" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Comments" id="QaW-xa-W9m">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lEg-9x-Ovo">
+                    <rect key="frame" x="30" y="272" width="70" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Play Count" id="3LN-2C-N7u">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

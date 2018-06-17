@@ -30,9 +30,9 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         var cellView: NSTableCellView?
         
         
-        if identifier == "name" {
-            cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "NameCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].name!
+        if identifier == "title" {
+            cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TitleCell"), owner: nil) as? NSTableCellView)!
+            cellView!.textField?.stringValue = movieData[row].title ?? ""
         }
         
     

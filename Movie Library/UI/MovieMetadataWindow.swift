@@ -10,6 +10,7 @@ import Cocoa
 
 class MovieMetadataWindow: NSObject {
 
+    @IBOutlet weak var MovieDisplayObject: MovieDisplay!
     @IBOutlet weak var MetadataWindow: NSWindow!
     @IBOutlet weak var MetadataCustomView: NSView!
     @IBOutlet weak var DetailsView: NSView!
@@ -18,6 +19,16 @@ class MovieMetadataWindow: NSObject {
     @IBOutlet weak var SegControl: NSSegmentedControl!
     
     
+    
+    //View Components
+    //Details View
+    @IBOutlet weak var titleTextField: NSTextField!
+    @IBOutlet weak var directorTextField: NSTextField!
+    @IBOutlet weak var genereTextField: NSTextField!
+    @IBOutlet weak var yearTextField: NSTextField!
+    @IBOutlet weak var runTimeLabel: NSTextField!
+    @IBOutlet weak var playCountLabel: NSTextField!
+    @IBOutlet weak var commentsTextField: NSTextField!
     
     func spawnMovieMetadataWindow(){
         //Configures the window so that it's edges are rounded. To change the intensity of the curve, modify the cornerRadius property 
@@ -30,6 +41,20 @@ class MovieMetadataWindow: NSObject {
         MetadataWindow.titleVisibility = .hidden
         //Configures a default view 
         MetadataCustomView.addSubview(DetailsView)
+        //Gets the movie object selected in the TableView
+        let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
+        
+        //Places the values from the selected movie onto the various views
+        titleTextField.stringValue = aMovie.title ?? ""
+        directorTextField.stringValue = aMovie.director ?? ""
+        genereTextField.stringValue = aMovie.genre ?? ""
+        yearTextField.stringValue = aMovie.year == nil ? "" : String(aMovie.year!)
+        runTimeLabel.stringValue = ""
+        playCountLabel.stringValue = String(aMovie.playCount) + (aMovie.lastPlayed == nil ? "" : (aMovie.lastPlayed?.description)!)
+        commentsTextField.stringValue = aMovie.comments ?? ""
+        
+        //Make window centered, visible / focused, and makes app only respond to actions assoicated with that window
+        NSApp.runModal(for: MetadataWindow)
     }
     
     
@@ -46,6 +71,20 @@ class MovieMetadataWindow: NSObject {
         }
     }
     
+    @IBAction func OkButtonPressed(_ sender: Any) {
+        //Store values
+        let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
+        
+        //StopModal and orderout window
+        NSApp.stopModal()
+        MetadataWindow.orderOut(self)
+    }
+
+    @IBAction func CancelButtonPressed(_ sender: Any) {
+        //StopModal and orderout window
+        NSApp.stopModal()
+        MetadataWindow.orderOut(self)
+    }
     
     
 }
