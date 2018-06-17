@@ -29,6 +29,7 @@
                 <outlet property="commentsTextField" destination="ylw-sO-ycx" id="PYO-Wy-zhe"/>
                 <outlet property="directorTextField" destination="cHl-44-lEI" id="2Rj-jH-hVR"/>
                 <outlet property="genereTextField" destination="vFl-Mg-SVb" id="cN0-rh-iYS"/>
+                <outlet property="movieArtImageView" destination="PAl-6m-FWQ" id="r6r-E9-gu6"/>
                 <outlet property="playCountLabel" destination="mbe-S0-4iM" id="WJG-v2-Kj7"/>
                 <outlet property="runTimeLabel" destination="2IQ-dG-CfL" id="zHH-UQ-8qe"/>
                 <outlet property="titleTextField" destination="9Sg-bg-nn8" id="mTS-na-Bqk"/>
@@ -880,7 +881,7 @@ CA
             </view>
             <point key="canvasLocation" x="145" y="-166.5"/>
         </window>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Rno-x4-aVr">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Rno-x4-aVr" customClass="MovieMetadataWindow" customModule="Movie_Library" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="420" height="560"/>

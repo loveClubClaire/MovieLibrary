@@ -29,7 +29,8 @@ class MovieMetadataWindow: NSObject {
     @IBOutlet weak var runTimeLabel: NSTextField!
     @IBOutlet weak var playCountLabel: NSTextField!
     @IBOutlet weak var commentsTextField: NSTextField!
-    
+    @IBOutlet weak var movieArtImageView: DragDropImageView!
+        
     func spawnMovieMetadataWindow(){
         //Configures the window so that it's edges are rounded. To change the intensity of the curve, modify the cornerRadius property 
         MetadataWindow.contentView?.wantsLayer = true;
@@ -39,7 +40,9 @@ class MovieMetadataWindow: NSObject {
         MetadataWindow.backgroundColor = .clear
         MetadataWindow.titlebarAppearsTransparent = true
         MetadataWindow.titleVisibility = .hidden
-        //Configures a default view 
+        //Configures a default view
+        MetadataCustomView.subviews = []
+        SegControl.selectedSegment = 0
         MetadataCustomView.addSubview(DetailsView)
         //Gets the movie object selected in the TableView
         let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
@@ -52,6 +55,7 @@ class MovieMetadataWindow: NSObject {
         runTimeLabel.stringValue = ""
         playCountLabel.stringValue = String(aMovie.playCount) + (aMovie.lastPlayed == nil ? "" : (aMovie.lastPlayed?.description)!)
         commentsTextField.stringValue = aMovie.comments ?? ""
+        movieArtImageView.image = aMovie.movieArt
         
         //Make window centered, visible / focused, and makes app only respond to actions assoicated with that window
         NSApp.runModal(for: MetadataWindow)
@@ -80,6 +84,7 @@ class MovieMetadataWindow: NSObject {
         aMovie.year = yearTextField.stringValue == "" ? nil : Int(yearTextField.stringValue)
         //TODO runTimeLabel.stringValue
         aMovie.comments = commentsTextField.stringValue
+        aMovie.movieArt = movieArtImageView.image
         
         //Save the updated data
         let appDelegate = NSApplication.shared.delegate as! AppDelegate

@@ -40,4 +40,12 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         return cellView
     }
     
+    @IBAction func TableViewClicked(_ sender: Any) {
+        if tableView.selectedRowIndexes.isEmpty {
+            //TODO disable edit and delete menu items
+        }
+        else{
+            //TODO enable edit and delete menu items 
+        }
+    }
 }
