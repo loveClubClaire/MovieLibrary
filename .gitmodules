@@ -1,3 +1,6 @@
 [submodule "Movie Library/DragDropDemo"]
 	path = Movie Library/DragDropDemo
 	url = git@github.com:phaibin/DragDropDemo.git
+[submodule "MediaInfoKit"]
+	path = MediaInfoKit
+	url = git@github.com:mackworth/MediaInfoKit.git
