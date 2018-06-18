@@ -28,7 +28,16 @@ class MovieMetadataWindow: NSWindow {
     @IBOutlet weak var runTimeLabel: NSTextField!
     @IBOutlet weak var playCountLabel: NSTextField!
     @IBOutlet weak var commentsTextField: NSTextField!
+    //Image View
     @IBOutlet weak var movieArtImageView: DragDropImageView!
+    //File View
+    @IBOutlet weak var kindLabel: NSTextField!
+    @IBOutlet weak var sizeLabel: NSTextField!
+    @IBOutlet weak var bitRateLabel: NSTextField!
+    @IBOutlet weak var dateModifiedLabel: NSTextField!
+    @IBOutlet weak var dateAddedLabel: NSTextField!
+    @IBOutlet weak var locationLabel: NSTextField!
+    
     
     func spawnMovieMetadataWindow(){
         //Configures the window so that it's edges are rounded. To change the intensity of the curve, modify the cornerRadius property 
@@ -47,14 +56,21 @@ class MovieMetadataWindow: NSWindow {
         let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
         
         //Places the values from the selected movie onto the various views
+        //Details View
         titleTextField.stringValue = aMovie.title ?? ""
         directorTextField.stringValue = aMovie.director ?? ""
         genereTextField.stringValue = aMovie.genre ?? ""
         yearTextField.stringValue = aMovie.year == nil ? "" : String(aMovie.year!)
-        runTimeLabel.stringValue = ""
+        runTimeLabel.stringValue = aMovie.runtime ?? ""
         playCountLabel.stringValue = String(aMovie.playCount) + (aMovie.lastPlayed == nil ? "" : (aMovie.lastPlayed?.description)!)
         commentsTextField.stringValue = aMovie.comments ?? ""
+        //Artwork View
         movieArtImageView.image = aMovie.movieArt
+        //File View
+        kindLabel.stringValue = aMovie.videoFormat ?? ""
+        sizeLabel.stringValue = aMovie.fileSize ?? ""
+        bitRateLabel.stringValue = aMovie.bitrate ?? ""
+        locationLabel.stringValue = aMovie.filepath?.absoluteString ?? ""
         
         //Make window centered, visible / focused, and makes app only respond to actions assoicated with that window
         NSApp.runModal(for: self)

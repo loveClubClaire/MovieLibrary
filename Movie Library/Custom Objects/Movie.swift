@@ -19,6 +19,10 @@ class Movie: NSObject, NSCoding {
     var lastPlayed: NSDate?
     var playCount: Int
     var filepath: URL?
+    var runtime: String?
+    var fileSize: String?
+    var videoFormat: String?
+    var bitrate: String?
     
     init(aTitle: String, aFilepath: URL) {
         title = aTitle
@@ -37,6 +41,11 @@ class Movie: NSObject, NSCoding {
         coder.encode(lastPlayed, forKey: "lastPlayed")
         coder.encode(playCount, forKey: "playCount")
         coder.encode(filepath, forKey: "filepath")
+        coder.encode(runtime, forKey: "runtime")
+        coder.encode(fileSize, forKey: "fileSize")
+        coder.encode(videoFormat, forKey: "videoFormat")
+        coder.encode(bitrate, forKey: "bitrate")
+        
     }
     
     //Decode each individual object and then create a new object instance
@@ -50,6 +59,10 @@ class Movie: NSObject, NSCoding {
         self.lastPlayed = aDecoder.decodeObject(forKey: "lastPlayed") as? NSDate
         self.playCount = aDecoder.decodeObject(forKey: "playCount") as? Int ?? 0
         self.filepath = aDecoder.decodeObject(forKey: "filepath") as? URL
+        self.runtime = aDecoder.decodeObject(forKey: "runtime") as? String
+        self.fileSize = aDecoder.decodeObject(forKey: "fileSize") as? String
+        self.videoFormat = aDecoder.decodeObject(forKey: "videoFormat") as? String
+        self.bitrate = aDecoder.decodeObject(forKey: "bitrate") as? String
     }
     
     

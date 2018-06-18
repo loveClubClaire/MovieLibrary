@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MediaInfoKit
 
 class MenuBar: NSObject {
     
@@ -21,6 +22,15 @@ class MenuBar: NSObject {
         if result == NSApplication.ModalResponse.OK {
             for aURL in openPanel.urls{
                 let newMovie = Movie(aTitle: aURL.lastPathComponent, aFilepath: aURL)
+                //Generate metadata analysis and store selected results in new movie object
+                guard let info = MIKMediaInfo(fileURL: aURL) else {
+                    fatalError("The movie is not readable by mediainfolib.")
+                }
+                newMovie.runtime = info.value(forKey: "Duration", streamKey: "General")
+                newMovie.fileSize = info.value(forKey: "File size", streamKey: "General")
+                newMovie.bitrate = info.value(forKey: "Overall bit rate", streamKey: "General")
+                newMovie.videoFormat = info.value(forKey: "Format", streamKey: "General")
+                
                 newMovies.append(newMovie)
             }
         }

@@ -22,6 +22,8 @@
 		C0464CFB20D40518006C984D /* DragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0464CEC20D40518006C984D /* DragDropImageView.m */; };
 		C0464CFC20D40518006C984D /* DragDropDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */; };
 		C0464CFD20D40518006C984D /* DragDropDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */; };
+		C0464D9020D750DD006C984D /* MediaInfoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0464D8D20D74F14006C984D /* MediaInfoKit.framework */; };
+		C0464D9120D750DD006C984D /* MediaInfoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0464D8D20D74F14006C984D /* MediaInfoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +34,35 @@
 			remoteGlobalIDString = C0464C3220C4C4FD006C984D;
 			remoteInfo = "Movie Library";
 		};
+		C0464D8C20D74F14006C984D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 268EEB051BA8C79B00D294E9;
+			remoteInfo = MediaInfoKit;
+		};
+		C0464D9220D750DD006C984D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 268EEB041BA8C79B00D294E9;
+			remoteInfo = MediaInfoKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C0464D9420D750DD006C984D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C0464D9120D750DD006C984D /* MediaInfoKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C0464C3320C4C4FD006C984D /* Movie Library.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Library.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +90,7 @@
 		C0464CED20D40518006C984D /* DragDropDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropDemoAppDelegate.m; sourceTree = "<group>"; };
 		C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DragDropDemo-Info.plist"; sourceTree = "<group>"; };
 		C0464D0320D40595006C984D /* Movie Library-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Movie Library-Bridging-Header.h"; sourceTree = "<group>"; };
+		C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaInfoKit.xcodeproj; path = MediaInfoKit/MediaInfoKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0464D9020D750DD006C984D /* MediaInfoKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +115,7 @@
 		C0464C2A20C4C4FD006C984D = {
 			isa = PBXGroup;
 			children = (
+				C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */,
 				C0464D0320D40595006C984D /* Movie Library-Bridging-Header.h */,
 				C0464CDF20D40518006C984D /* DragDropDemo */,
 				C0464C3520C4C4FD006C984D /* Movie Library */,
@@ -184,6 +217,14 @@
 			path = DragDropDemo;
 			sourceTree = "<group>";
 		};
+		C0464D8920D74F14006C984D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0464D8D20D74F14006C984D /* MediaInfoKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,10 +235,12 @@
 				C0464C2F20C4C4FD006C984D /* Sources */,
 				C0464C3020C4C4FD006C984D /* Frameworks */,
 				C0464C3120C4C4FD006C984D /* Resources */,
+				C0464D9420D750DD006C984D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C0464D9320D750DD006C984D /* PBXTargetDependency */,
 			);
 			name = "Movie Library";
 			productName = "Movie Library";
@@ -253,6 +296,12 @@
 			mainGroup = C0464C2A20C4C4FD006C984D;
 			productRefGroup = C0464C3420C4C4FD006C984D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C0464D8920D74F14006C984D /* Products */;
+					ProjectRef = C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C0464C3220C4C4FD006C984D /* Movie Library */,
@@ -260,6 +309,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C0464D8D20D74F14006C984D /* MediaInfoKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MediaInfoKit.framework;
+			remoteRef = C0464D8C20D74F14006C984D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C0464C3120C4C4FD006C984D /* Resources */ = {
@@ -315,6 +374,11 @@
 			isa = PBXTargetDependency;
 			target = C0464C3220C4C4FD006C984D /* Movie Library */;
 			targetProxy = C0464C4420C4C4FF006C984D /* PBXContainerItemProxy */;
+		};
+		C0464D9320D750DD006C984D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MediaInfoKit;
+			targetProxy = C0464D9220D750DD006C984D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
