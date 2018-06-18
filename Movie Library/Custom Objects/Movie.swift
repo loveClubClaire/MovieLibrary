@@ -23,6 +23,11 @@ class Movie: NSObject, NSCoding {
     var fileSize: String?
     var videoFormat: String?
     var bitrate: String?
+    var height: String?
+    var width: String?
+    var frameRate: String?
+    var aspectRatio: String?
+
     
     init(aTitle: String, aFilepath: URL) {
         title = aTitle
@@ -45,7 +50,10 @@ class Movie: NSObject, NSCoding {
         coder.encode(fileSize, forKey: "fileSize")
         coder.encode(videoFormat, forKey: "videoFormat")
         coder.encode(bitrate, forKey: "bitrate")
-        
+        coder.encode(height, forKey: "height")
+        coder.encode(width, forKey: "width")
+        coder.encode(frameRate, forKey: "frameRate")
+        coder.encode(aspectRatio, forKey: "aspectRatio")
     }
     
     //Decode each individual object and then create a new object instance
@@ -63,6 +71,10 @@ class Movie: NSObject, NSCoding {
         self.fileSize = aDecoder.decodeObject(forKey: "fileSize") as? String
         self.videoFormat = aDecoder.decodeObject(forKey: "videoFormat") as? String
         self.bitrate = aDecoder.decodeObject(forKey: "bitrate") as? String
+        self.height = aDecoder.decodeObject(forKey: "height") as? String
+        self.width = aDecoder.decodeObject(forKey: "width") as? String
+        self.frameRate = aDecoder.decodeObject(forKey: "frameRate") as? String
+        self.aspectRatio = aDecoder.decodeObject(forKey: "aspectRatio") as? String
     }
     
     

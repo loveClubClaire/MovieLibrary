@@ -37,6 +37,10 @@ class MovieMetadataWindow: NSWindow {
     @IBOutlet weak var dateModifiedLabel: NSTextField!
     @IBOutlet weak var dateAddedLabel: NSTextField!
     @IBOutlet weak var locationLabel: NSTextField!
+    @IBOutlet weak var heightLabel: NSTextField!
+    @IBOutlet weak var widthLabel: NSTextField!
+    @IBOutlet weak var frameRateLabel: NSTextField!
+    @IBOutlet weak var aspectRatioLabel: NSTextField!
     
     
     func spawnMovieMetadataWindow(){
@@ -70,7 +74,12 @@ class MovieMetadataWindow: NSWindow {
         kindLabel.stringValue = aMovie.videoFormat ?? ""
         sizeLabel.stringValue = aMovie.fileSize ?? ""
         bitRateLabel.stringValue = aMovie.bitrate ?? ""
-        locationLabel.stringValue = aMovie.filepath?.absoluteString ?? ""
+        locationLabel.stringValue = aMovie.filepath?.absoluteString.removingPercentEncoding ?? ""
+        heightLabel.stringValue = aMovie.height ?? ""
+        widthLabel.stringValue = aMovie.width ?? ""
+        frameRateLabel.stringValue = aMovie.frameRate ?? ""
+        aspectRatioLabel.stringValue = aMovie.aspectRatio ?? ""
+        
         
         //Make window centered, visible / focused, and makes app only respond to actions assoicated with that window
         NSApp.runModal(for: self)
