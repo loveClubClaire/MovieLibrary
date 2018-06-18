@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func deleteMovieMenuItemSelected(_ sender: Any) {
-        MovieDisplayObject.movieData.remove(at: MovieDisplayObject.tableView.selectedRow)
+        MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{ MovieDisplayObject.movieData.remove(at: $0) }
         NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
         MovieDisplayObject.tableView.reloadData()
     }

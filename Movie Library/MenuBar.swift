@@ -32,7 +32,7 @@ class MenuBar: NSObject {
                 newMovie.videoFormat = info.value(forKey: "Format", streamKey: "General")
                 newMovie.height = info.value(forKey: "Height", streamKey: "Video")
                 newMovie.width = info.value(forKey: "Width", streamKey: "Video")
-                newMovie.frameRate = info.value(forKey: "Frame Rate", streamKey: "Video")
+                newMovie.frameRate = info.value(forKey: "Frame rate", streamKey: "Video")
                 newMovie.aspectRatio = info.value(forKey: "Display aspect ratio", streamKey: "Video")
 
                 newMovies.append(newMovie)
