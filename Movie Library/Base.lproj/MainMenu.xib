@@ -17,28 +17,9 @@
                 <outlet property="tableView" destination="x8t-Bf-Qhr" id="mZW-pg-pAW"/>
             </connections>
         </customObject>
-        <customObject id="1ST-e2-ka0" customClass="MovieMetadataWindow" customModule="Movie_Library" customModuleProvider="target">
-            <connections>
-                <outlet property="ArtworkView" destination="NFs-zb-N89" id="r9Q-t0-poE"/>
-                <outlet property="DetailsView" destination="Eli-Hy-Thu" id="Eq4-Mh-sfy"/>
-                <outlet property="FileView" destination="2JZ-rG-XwW" id="dXi-UD-XzQ"/>
-                <outlet property="MetadataCustomView" destination="fdy-ZA-HrG" id="8VE-CN-IDR"/>
-                <outlet property="MetadataWindow" destination="Rno-x4-aVr" id="KOe-cZ-C4B"/>
-                <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="bdQ-pN-yIi"/>
-                <outlet property="SegControl" destination="fr5-hP-HgN" id="dpB-rP-VBM"/>
-                <outlet property="commentsTextField" destination="ylw-sO-ycx" id="PYO-Wy-zhe"/>
-                <outlet property="directorTextField" destination="cHl-44-lEI" id="2Rj-jH-hVR"/>
-                <outlet property="genereTextField" destination="vFl-Mg-SVb" id="cN0-rh-iYS"/>
-                <outlet property="movieArtImageView" destination="PAl-6m-FWQ" id="r6r-E9-gu6"/>
-                <outlet property="playCountLabel" destination="mbe-S0-4iM" id="WJG-v2-Kj7"/>
-                <outlet property="runTimeLabel" destination="2IQ-dG-CfL" id="zHH-UQ-8qe"/>
-                <outlet property="titleTextField" destination="9Sg-bg-nn8" id="mTS-na-Bqk"/>
-                <outlet property="yearTextField" destination="hD4-nb-OxO" id="TRe-J8-UwC"/>
-            </connections>
-        </customObject>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Movie_Library" customModuleProvider="target">
             <connections>
-                <outlet property="MetadataWindow" destination="1ST-e2-ka0" id="82t-Re-Cr8"/>
+                <outlet property="MetadataWindow" destination="Rno-x4-aVr" id="BHY-Jh-wec"/>
                 <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="ffQ-LS-ziP"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -902,7 +883,7 @@ CA
                             </segments>
                         </segmentedCell>
                         <connections>
-                            <action selector="SegmentSelection:" target="1ST-e2-ka0" id="o7E-m5-TlE"/>
+                            <action selector="SegmentSelection:" target="Rno-x4-aVr" id="SwI-zi-c1p"/>
                         </connections>
                     </segmentedControl>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ylg-TS-Wda">
@@ -918,7 +899,7 @@ DQ
 </string>
                         </buttonCell>
                         <connections>
-                            <action selector="OkButtonPressed:" target="1ST-e2-ka0" id="Kx1-6i-Zsq"/>
+                            <action selector="OkButtonPressed:" target="Rno-x4-aVr" id="OOT-lp-Jtl"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-n2-XgD">
@@ -934,7 +915,7 @@ Gw
 </string>
                         </buttonCell>
                         <connections>
-                            <action selector="CancelButtonPressed:" target="1ST-e2-ka0" id="E8d-ca-V69"/>
+                            <action selector="CancelButtonPressed:" target="Rno-x4-aVr" id="iDQ-mH-tbO"/>
                         </connections>
                     </button>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdy-ZA-HrG">
@@ -953,6 +934,22 @@ Gw
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="movableByWindowBackground" value="YES"/>
             </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="ArtworkView" destination="NFs-zb-N89" id="DFH-uz-Yid"/>
+                <outlet property="DetailsView" destination="Eli-Hy-Thu" id="jpu-7G-91a"/>
+                <outlet property="FileView" destination="2JZ-rG-XwW" id="Kif-pn-khJ"/>
+                <outlet property="MetadataCustomView" destination="fdy-ZA-HrG" id="cRZ-SU-fWd"/>
+                <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="nwi-ri-vdk"/>
+                <outlet property="SegControl" destination="fr5-hP-HgN" id="tR0-gY-dbp"/>
+                <outlet property="commentsTextField" destination="ylw-sO-ycx" id="keH-CA-cfm"/>
+                <outlet property="directorTextField" destination="cHl-44-lEI" id="RGN-ql-Tiu"/>
+                <outlet property="genereTextField" destination="vFl-Mg-SVb" id="Qfv-aD-HFP"/>
+                <outlet property="movieArtImageView" destination="PAl-6m-FWQ" id="cKK-qj-key"/>
+                <outlet property="playCountLabel" destination="mbe-S0-4iM" id="i5D-59-eiL"/>
+                <outlet property="runTimeLabel" destination="2IQ-dG-CfL" id="O7T-LS-WJ4"/>
+                <outlet property="titleTextField" destination="9Sg-bg-nn8" id="dzr-NU-cpJ"/>
+                <outlet property="yearTextField" destination="hD4-nb-OxO" id="Yr8-EO-Oyf"/>
+            </connections>
             <point key="canvasLocation" x="75" y="-163"/>
         </window>
         <customView id="Eli-Hy-Thu">

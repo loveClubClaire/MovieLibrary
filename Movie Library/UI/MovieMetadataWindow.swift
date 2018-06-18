@@ -8,10 +8,9 @@
 
 import Cocoa
 
-class MovieMetadataWindow: NSObject {
+class MovieMetadataWindow: NSWindow {
 
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
-    @IBOutlet weak var MetadataWindow: NSWindow!
     @IBOutlet weak var MetadataCustomView: NSView!
     @IBOutlet weak var DetailsView: NSView!
     @IBOutlet weak var ArtworkView: NSView!
@@ -30,16 +29,16 @@ class MovieMetadataWindow: NSObject {
     @IBOutlet weak var playCountLabel: NSTextField!
     @IBOutlet weak var commentsTextField: NSTextField!
     @IBOutlet weak var movieArtImageView: DragDropImageView!
-        
+    
     func spawnMovieMetadataWindow(){
         //Configures the window so that it's edges are rounded. To change the intensity of the curve, modify the cornerRadius property 
-        MetadataWindow.contentView?.wantsLayer = true;
-        MetadataWindow.contentView?.layer?.cornerRadius = 5.0
-        MetadataWindow.contentView?.layer?.backgroundColor = .white
-        MetadataWindow.isOpaque = false
-        MetadataWindow.backgroundColor = .clear
-        MetadataWindow.titlebarAppearsTransparent = true
-        MetadataWindow.titleVisibility = .hidden
+        self.contentView?.wantsLayer = true;
+        self.contentView?.layer?.cornerRadius = 5.0
+        self.contentView?.layer?.backgroundColor = .white
+        self.isOpaque = false
+        self.backgroundColor = .clear
+        self.titlebarAppearsTransparent = true
+        self.titleVisibility = .hidden
         //Configures a default view
         MetadataCustomView.subviews = []
         SegControl.selectedSegment = 0
@@ -58,9 +57,28 @@ class MovieMetadataWindow: NSObject {
         movieArtImageView.image = aMovie.movieArt
         
         //Make window centered, visible / focused, and makes app only respond to actions assoicated with that window
-        NSApp.runModal(for: MetadataWindow)
+        NSApp.runModal(for: self)
     }
     
+    override func mouseDown(with event: NSEvent) {
+        movieArtImageView.select = false
+        movieArtImageView.highlight = false
+        movieArtImageView.needsDisplay = true
+    }
+    
+    override func keyDown(with anEvent: NSEvent) {
+        //Else if the delete key (key code 51) is pressed call the delete function
+        if(anEvent.keyCode == 51){
+            movieArtImageView.select = false
+            movieArtImageView.highlight = false
+            movieArtImageView.image = nil
+            movieArtImageView.needsDisplay = true
+        }
+            //Else just do what would have been expected
+        else{
+            super.keyDown(with: anEvent)
+        }
+    }
     
     @IBAction func SegmentSelection(_ sender: Any) {
         MetadataCustomView.subviews = []
@@ -91,13 +109,13 @@ class MovieMetadataWindow: NSObject {
         NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: appDelegate.storedMoviesFilepath)
         //StopModal and orderout window
         NSApp.stopModal()
-        MetadataWindow.orderOut(self)
+        self.orderOut(self)
     }
 
     @IBAction func CancelButtonPressed(_ sender: Any) {
         //StopModal and orderout window
         NSApp.stopModal()
-        MetadataWindow.orderOut(self)
+        self.orderOut(self)
     }
     
     
