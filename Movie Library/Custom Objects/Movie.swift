@@ -8,12 +8,13 @@
 
 import Cocoa
 
+@objcMembers
 class Movie: NSObject, NSCoding {
     
     var title: String?
     var genre: String?
     var director: String?
-    var year: Int?
+    var year: String?
     var comments: String?
     var movieArt: NSImage?
     var lastPlayed: NSDate?
@@ -61,7 +62,7 @@ class Movie: NSObject, NSCoding {
         self.title = aDecoder.decodeObject(forKey: "title") as? String
         self.genre = aDecoder.decodeObject(forKey: "genre") as? String
         self.director = aDecoder.decodeObject(forKey: "director") as? String
-        self.year = aDecoder.decodeObject(forKey: "year") as? Int
+        self.year = aDecoder.decodeObject(forKey: "year") as? String
         self.comments = aDecoder.decodeObject(forKey: "comments") as? String
         self.movieArt = aDecoder.decodeObject(forKey: "movieArt") as? NSImage
         self.lastPlayed = aDecoder.decodeObject(forKey: "lastPlayed") as? NSDate

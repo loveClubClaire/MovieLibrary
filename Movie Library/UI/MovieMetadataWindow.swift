@@ -124,7 +124,7 @@ class MovieMetadataWindow: NSWindow {
         aMovie.title = titleTextField.stringValue
         aMovie.director = directorTextField.stringValue
         aMovie.genre = genereTextField.stringValue
-        aMovie.year = yearTextField.stringValue == "" ? nil : Int(yearTextField.stringValue)
+        aMovie.year = yearTextField.stringValue
         //TODO runTimeLabel.stringValue
         aMovie.comments = commentsTextField.stringValue
         aMovie.movieArt = movieArtImageView.image
