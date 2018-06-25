@@ -13,8 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
     @IBOutlet weak var MetadataWindow: MovieMetadataWindow!
+    @IBOutlet weak var SidebarView: SidebarOutlineView!
+    
     @IBOutlet weak var window: NSWindow!
 
+    
     var storedMoviesFilepath = ""
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -33,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             MovieDisplayObject.tableView.reloadData()
         }
         
-        
+        SidebarView.viewDidLoad()
         MovieDisplayObject.viewDidLoad()
     }
 

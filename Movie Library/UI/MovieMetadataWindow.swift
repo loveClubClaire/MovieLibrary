@@ -125,13 +125,16 @@ class MovieMetadataWindow: NSWindow {
         aMovie.director = directorTextField.stringValue
         aMovie.genre = genereTextField.stringValue
         aMovie.year = yearTextField.stringValue
-        //TODO runTimeLabel.stringValue
         aMovie.comments = commentsTextField.stringValue
         aMovie.movieArt = movieArtImageView.image
         
         //Save the updated data
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: appDelegate.storedMoviesFilepath)
+        
+        //Reload MovieDisplay Table View
+        MovieDisplayObject.tableView.reloadData()
+        
         //StopModal and orderout window
         NSApp.stopModal()
         self.orderOut(self)
