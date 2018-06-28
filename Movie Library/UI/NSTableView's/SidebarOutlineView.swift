@@ -12,7 +12,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
 
     
     let groups = ["Library", "Playlists"]
-    let libItems = ["Movies"]
+    let libItems = ["Movies","Media"]
     let playlistItems = ["Something Else"]
     
     
@@ -21,6 +21,8 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         self.dataSource = self
         self.delegate = self
         self.expandItem(nil, expandChildren: true)
+        //Registers the pasteboard types that the view will accept as the destination of an image-dragging session.
+        self.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data"),NSPasteboard.PasteboardType(rawValue: "sidebar.data")])
         
     }
     
@@ -73,6 +75,33 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     // Height of each row
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
         return 20.0
+    }
+    
+    //Drag and drop methods
+    //Returns an NSPasteboardItem with the selected data to be dragged and dropped somewhere else
+    func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
+        return NSPasteboardItem()
+    }
+    
+    //Determines if the currently dragged rows can be dropped in a specific location. Returns a NSDragOperation to indicate if items can be dragged to the specific location
+    func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        
+        //The index parameter represents where we are attempting to drop our dragged items. It is NOT the index of the NSOutlineView, rather it indicates if we are dropping between items, on top of items, or something else of that nature. More like an enum than an index.
+        //An index of -1 indicates we are attempting to drop onto an existing item
+        //If we are attempting to drop onto an existing item and that item isn't one of the group indicators and the item isn't null, then we return an NSDrag operation allowing us do the drop. Otherwise we return an empty array which prevents the drop
+        if(index == -1 && item as? String != groups[0] && item as? String != groups[1] && item != nil){
+            return NSDragOperation.move
+        }
+        else{
+            return []
+        }
+        
+        
+    }
+    
+    //Is called after a drop takes placed. Used to update all necessary data structures
+    func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+        return true
     }
     
     

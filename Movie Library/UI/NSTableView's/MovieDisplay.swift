@@ -19,6 +19,8 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         //Set a unique autosave name so the configuration of the colums persist over app launches
         tableView.autosaveName = NSTableView.AutosaveName(rawValue: "MovieDisplayTableView")
         tableView.autosaveTableColumns = true
+        //Registers the pasteboard types that the view will accept as the destination of an image-dragging session.
+        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data")])
         
     }
     
@@ -113,9 +115,6 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         }
     }
     
-   
-    
-    
     @IBAction func TableViewMenuItem(_ sender: Any){
         //The sender has to be a MenuItem because only MenuItems are bound to this action. So we cast because that's what we're expecting
         let menuItem = (sender as! NSMenuItem)
@@ -150,6 +149,43 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         }
         
 
+    }
+    
+    //Drag and drop methods
+    //Returns an NSPasteboardItem with the selected data to be dragged and dropped somewhere else
+    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+        //Get the rows selected in this tableview and convert them to raw data
+        let data = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
+        let item = NSPasteboardItem()
+        //Add row data to NSPasteboardItem with a unique type identifer, then add the pastebard item to the given NSPasteboard
+        item.setData(data, forType: NSPasteboard.PasteboardType(rawValue: "movie.data"))
+        pboard.writeObjects([item])
+        //Return true because this method is always sucessful (or its a crash)
+        return true
+    }
+    
+    //Determines if the currently dragged rows can be dropped in a specific location. Returns a NSDragOperation to indicate if items can be dragged to the specific location
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        //If the source of our dragged items is not our tableview, then return an empty array (which prevents the drop option from being displayed)
+        guard let source = info.draggingSource() as? NSTableView,
+            source === tableView
+            else { return [] }
+    
+        //If the dragged items are attemting to be dropped above or below other items in the tableview, then we return an NSDragOperation, which displays to the use the option to drop the dragged items. If the dragged items are attemping to be dropped on an existing item, we return an empty array and the drop option is not displayed
+        if dropOperation == .above {
+            return .move
+        }
+        return []
+    }
+    
+    //Is called after a drop takes placed. Used to update all necessary data structures
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        let pb = info.draggingPasteboard()
+        if let itemData = pb.pasteboardItems?.first?.data(forType: NSPasteboard.PasteboardType(rawValue: "movie.data")), let indexes = NSKeyedUnarchiver.unarchiveObject(with: itemData) as? IndexSet{
+
+            return true
+        }
+        return false
     }
     
 }
