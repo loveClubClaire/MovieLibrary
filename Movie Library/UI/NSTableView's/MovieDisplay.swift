@@ -22,11 +22,10 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         tableView.autosaveTableColumns = true
         //Registers the pasteboard types that the view will accept as the destination of an image-dragging session.
         tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data")])
-        
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return movieData.count;
+        return currentData.count;
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

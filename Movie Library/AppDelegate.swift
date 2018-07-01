@@ -57,8 +57,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func deleteMovieMenuItemSelected(_ sender: Any) {
-        MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{ MovieDisplayObject.currentData.remove(at: $0) }
-        NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
+        
+         //Index 0 is a group (the library group) which can not be selected. So if the selected row is between 1 and libItems.count, the the selected row is in the Library group and resides in the libItems array
+        if SidebarView.selectedRow >= 1 && SidebarView.selectedRow < SidebarView.libItems.count{
+            MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{
+                let removedItem = MovieDisplayObject.currentData.remove(at: $0)
+                MovieDisplayObject.movieData.removeValue(forKey: removedItem.uniqueID)
+            }
+            NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
+        }
+        //If the selectedRow is greater than libItems.count, we know the selectedRow isn't in the Library group.
+        else{
+            MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{
+                SidebarView.playlistItems[SidebarView.selectedRow-SidebarView.groups.count-SidebarView.libItems.count].contents.remove(at: $0)
+                MovieDisplayObject.currentData.remove(at: $0)
+            }
+            //Archive Changes
+        }
+        
         MovieDisplayObject.tableView.reloadData()
     }
     
