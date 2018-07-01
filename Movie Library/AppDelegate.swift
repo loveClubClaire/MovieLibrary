@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     var storedMoviesFilepath = ""
+    var storedPlaylistsFilepath = ""
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         //Get the filepaths of our applications stored data.
@@ -29,15 +30,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try! FileManager().createDirectory(atPath: storedDataFilepath, withIntermediateDirectories:false, attributes: nil)
         }
         storedMoviesFilepath = storedDataFilepath + "/StoredMovies.txt"
+        storedPlaylistsFilepath = storedDataFilepath + "/StoredPlaylists.txt"
         
         //Get the information stored in file at the storedMoviesFilepath. If its not empty (or non existant), set the data array to the reterived values and reload the tableview
         if let movies = NSKeyedUnarchiver.unarchiveObject(withFile: storedMoviesFilepath){
-            MovieDisplayObject.movieData = movies as! [Movie]
+            MovieDisplayObject.movieData = movies as! [String : Movie]
             MovieDisplayObject.tableView.reloadData()
         }
+        if let playlists = NSKeyedUnarchiver.unarchiveObject(withFile: storedPlaylistsFilepath){
+            SidebarView.playlistItems = playlists as! [SidebarMenuItem]
+        }
+        
+  
         
         SidebarView.viewDidLoad()
         MovieDisplayObject.viewDidLoad()
+        SidebarView.updateMovieDisplayDataSource()
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -72,7 +81,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 SidebarView.playlistItems[SidebarView.selectedRow-SidebarView.groups.count-SidebarView.libItems.count].contents.remove(at: $0)
                 MovieDisplayObject.currentData.remove(at: $0)
             }
-            //Archive Changes
+             NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
         }
         
         MovieDisplayObject.tableView.reloadData()

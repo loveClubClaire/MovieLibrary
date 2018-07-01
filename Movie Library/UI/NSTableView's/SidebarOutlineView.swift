@@ -12,15 +12,9 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
 
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
     
-    
-    struct menuItem{
-        var name: String
-        var contents: [String]
-    }
-    
     let groups = ["Library", "Playlists"]
-    let libItems = [menuItem(name: "Movies", contents: []),menuItem(name: "Recently Added", contents: [])]
-    var playlistItems = [menuItem(name: "Something Else", contents: [])]
+    let libItems = [SidebarMenuItem(name: "Movies", contents: []),SidebarMenuItem(name: "Recently Added", contents: [])]
+    var playlistItems : [SidebarMenuItem] = []
     
     
     func viewDidLoad() {
@@ -149,7 +143,8 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             }
         }
         
-
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        NSKeyedArchiver.archiveRootObject(self.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
         return true
     }
     
@@ -196,6 +191,5 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     func outlineViewSelectionIsChanging(_ notification: Notification) {
         updateMovieDisplayDataSource()
     }
-    
-   
+
 }
