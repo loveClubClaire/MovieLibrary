@@ -47,14 +47,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func addMovieMenuItemSelected(_ sender: Any) {
         let newMovies = MenuBar.addMovie()
         for newMovie in newMovies{
-            MovieDisplayObject.movieData.append(newMovie)
+            MovieDisplayObject.movieData[newMovie.uniqueID] = newMovie
         }
         NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
+        //Select the "Library" row on the sidebar whenever new items are added
+        SidebarView.selectRowIndexes(IndexSet.init(integer: 1), byExtendingSelection: false)
+        SidebarView.updateMovieDisplayDataSource()
         MovieDisplayObject.tableView.reloadData()
     }
     
     @IBAction func deleteMovieMenuItemSelected(_ sender: Any) {
-        MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{ MovieDisplayObject.movieData.remove(at: $0) }
+        MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{ MovieDisplayObject.currentData.remove(at: $0) }
         NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
         MovieDisplayObject.tableView.reloadData()
     }

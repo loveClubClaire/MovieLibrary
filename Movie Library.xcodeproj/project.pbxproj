@@ -24,6 +24,7 @@
 		C0464CFD20D40518006C984D /* DragDropDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */; };
 		C0464D9020D750DD006C984D /* MediaInfoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0464D8D20D74F14006C984D /* MediaInfoKit.framework */; };
 		C0464D9120D750DD006C984D /* MediaInfoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0464D8D20D74F14006C984D /* MediaInfoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C04DE2A920E83649001C64C6 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE2A820E83649001C64C6 /* Hash.swift */; };
 		C0E6848620DEB04B0050EAD7 /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6848420DEB04B0050EAD7 /* SidebarOutlineView.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		C0464CEE20D40518006C984D /* DragDropDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DragDropDemo-Info.plist"; sourceTree = "<group>"; };
 		C0464D0320D40595006C984D /* Movie Library-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Movie Library-Bridging-Header.h"; sourceTree = "<group>"; };
 		C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaInfoKit.xcodeproj; path = MediaInfoKit/MediaInfoKit.xcodeproj; sourceTree = "<group>"; };
+		C04DE2A820E83649001C64C6 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
 		C0E6848420DEB04B0050EAD7 /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C0464C3620C4C4FD006C984D /* AppDelegate.swift */,
+				C04DE2A820E83649001C64C6 /* Hash.swift */,
 				C0464C5B20D209D3006C984D /* MenuBar.swift */,
 				C0464C5820D20512006C984D /* Custom Objects */,
 				C0464C5220D1D054006C984D /* UI */,
@@ -356,6 +359,7 @@
 				C0464C5720D1D217006C984D /* MovieDisplay.swift in Sources */,
 				C0464C8F20D373B2006C984D /* NSImage+Extention.swift in Sources */,
 				C0464C5C20D209D3006C984D /* MenuBar.swift in Sources */,
+				C04DE2A920E83649001C64C6 /* Hash.swift in Sources */,
 				C0464C5A20D2052E006C984D /* Movie.swift in Sources */,
 				C0464CFC20D40518006C984D /* DragDropDemoAppDelegate.m in Sources */,
 				C0E6848620DEB04B0050EAD7 /* SidebarOutlineView.swift in Sources */,

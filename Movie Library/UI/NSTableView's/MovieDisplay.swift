@@ -12,7 +12,8 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
 
     @IBOutlet weak var tableView: NSTableView!
     
-    var movieData: [Movie] = []
+    var movieData: [String : Movie] = [:]
+    var currentData: [Movie] = []
     
     //Called by AppDelegate after application has finished launching. Think of this function as an initalization function
     func viewDidLoad(){
@@ -37,59 +38,59 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         
         if identifier == "title" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TitleCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].title ?? ""
+            cellView!.textField?.stringValue = currentData[row].title ?? ""
         }
         else if identifier == "aspectRatio" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "AspectRatioCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].aspectRatio ?? ""
+            cellView!.textField?.stringValue = currentData[row].aspectRatio ?? ""
         }
         else if identifier == "bitRate" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BitRateCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].bitrate ?? ""
+            cellView!.textField?.stringValue = currentData[row].bitrate ?? ""
         }
         else if identifier == "comments" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CommentsCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].comments ?? ""
+            cellView!.textField?.stringValue = currentData[row].comments ?? ""
         }
         else if identifier == "director" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DirectorCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].director ?? ""
+            cellView!.textField?.stringValue = currentData[row].director ?? ""
         }
         else if identifier == "frameRate" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FrameRateCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].frameRate ?? ""
+            cellView!.textField?.stringValue = currentData[row].frameRate ?? ""
         }
         else if identifier == "genre" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GenreCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].genre ?? ""
+            cellView!.textField?.stringValue = currentData[row].genre ?? ""
         }
         else if identifier == "height" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HeightCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].height ?? ""
+            cellView!.textField?.stringValue = currentData[row].height ?? ""
         }
         else if identifier == "playCount" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "PlayCountCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = String(movieData[row].playCount)
+            cellView!.textField?.stringValue = String(currentData[row].playCount)
         }
         else if identifier == "runTime" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "RunTimeCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].runtime ?? ""
+            cellView!.textField?.stringValue = currentData[row].runtime ?? ""
         }
         else if identifier == "size" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SizeCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].fileSize ?? ""
+            cellView!.textField?.stringValue = currentData[row].fileSize ?? ""
         }
         else if identifier == "videoMedia" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "VideoMediaCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].videoFormat ?? ""
+            cellView!.textField?.stringValue = currentData[row].videoFormat ?? ""
         }
         else if identifier == "width" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "WidthCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = movieData[row].width ?? ""
+            cellView!.textField?.stringValue = currentData[row].width ?? ""
         }
         else if identifier == "year" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "YearCell"), owner: nil) as? NSTableCellView)!
-            cellView!.textField?.stringValue = (movieData[row].year != nil ?  String(movieData[row].year!) : "")
+            cellView!.textField?.stringValue = (currentData[row].year != nil ?  String(currentData[row].year!) : "")
         }
         
     
@@ -100,9 +101,9 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         //Convert the data array into an NSMutableArray, sort that using the given SortDescriptor, and then convert it back to an array. Then reload the data. We do this because array can not be sorted by SortDescriptor as of Swift 4 but NSMutableArray can.
         //For Swift 4, https://stackoverflow.com/a/44790231 talks about class requirments to comply with objective-c sortDescriptors
-        let dataMutableArray = NSMutableArray(array: movieData)
+        let dataMutableArray = NSMutableArray(array: currentData)
         dataMutableArray.sort(using: tableView.sortDescriptors)
-        movieData = dataMutableArray as AnyObject as! [Movie]
+        currentData = dataMutableArray as AnyObject as! [Movie]
         tableView.reloadData()
     }
     

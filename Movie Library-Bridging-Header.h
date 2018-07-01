@@ -10,5 +10,6 @@
 #define Movie_Library_Bridging_Header_h
 
 #import "DragDropImageView.h"
+#import <CommonCrypto/CommonCrypto.h>
 
 #endif /* Movie_Library_Bridging_Header_h */

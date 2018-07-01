@@ -10,10 +10,17 @@ import Cocoa
 
 class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate {
 
+    @IBOutlet weak var MovieDisplayObject: MovieDisplay!
+    
+    
+    struct menuItem{
+        var name: String
+        var contents: [String]
+    }
     
     let groups = ["Library", "Playlists"]
-    let libItems = ["Movies","Media"]
-    let playlistItems = ["Something Else"]
+    let libItems = [menuItem(name: "Movies", contents: []),menuItem(name: "Recently Added", contents: [])]
+    let playlistItems = [menuItem(name: "Something Else", contents: [])]
     
     
     func viewDidLoad() {
@@ -23,7 +30,8 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         self.expandItem(nil, expandChildren: true)
         //Registers the pasteboard types that the view will accept as the destination of an image-dragging session.
         self.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data"),NSPasteboard.PasteboardType(rawValue: "sidebar.data")])
-        
+        //Programatically selecting a default row
+        self.selectRowIndexes(IndexSet.init(integer: 1), byExtendingSelection: false)
     }
     
     //NSOutlineView
@@ -53,10 +61,10 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     // Items to be added to sidebar
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item as? String == groups[0]{
-            return libItems[index]
+            return libItems[index].name
         }
         else if item as? String == groups[1]{
-            return playlistItems[index]
+            return playlistItems[index].name
         }
         return groups[index]
     }
@@ -143,6 +151,33 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         return false
     }
     
+    func outlineViewSelectionIsChanging(_ notification: Notification) {
+        updateMovieDisplayDataSource()
+    }
+    
+    func updateMovieDisplayDataSource(){
+        let selectedRow = self.selectedRow
+        
+        if selectedRow >= 1 && selectedRow < libItems.count{
+            
+            let arrayFromMovieData = Array(MovieDisplayObject.movieData.values.map{$0})
+            MovieDisplayObject.currentData = arrayFromMovieData
+            MovieDisplayObject.tableView.reloadData()
+            
+        }
+        else if selectedRow > libItems.count && selectedRow < playlistItems.count{
+            
+            var arrayFromMovieData : [Movie] = []
+            
+            for uniqueID in playlistItems[selectedRow-2-libItems.count].contents{
+                arrayFromMovieData.append(MovieDisplayObject.movieData[uniqueID]!)
+            }
+            
+            MovieDisplayObject.currentData = arrayFromMovieData
+            MovieDisplayObject.tableView.reloadData()
+            
+        }
+    }
 
     
 }

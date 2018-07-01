@@ -1828,7 +1828,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" ambiguous="YES" id="pG9-HS-gkh">
                             <rect key="frame" x="1" y="1" width="453" height="269"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="SRA-TJ-0tr" id="MuL-oB-yS8" customClass="SidebarOutlineView" customModule="Movie_Library" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="453" height="269"/>
@@ -1871,15 +1871,18 @@ Gw
                                             </prototypeCellViews>
                                         </tableColumn>
                                     </tableColumns>
+                                    <connections>
+                                        <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="r7W-ox-qd0"/>
+                                    </connections>
                                 </outlineView>
                             </subviews>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="VRp-fe-zzo">
-                            <rect key="frame" x="1" y="254" width="453" height="16"/>
+                            <rect key="frame" x="1" y="-15" width="0.0" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="yll-Vz-vht">
-                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                            <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>

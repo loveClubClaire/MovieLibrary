@@ -57,7 +57,7 @@ class MovieMetadataWindow: NSWindow {
         SegControl.selectedSegment = 0
         MetadataCustomView.addSubview(DetailsView)
         //Gets the movie object selected in the TableView
-        let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
+        let aMovie = MovieDisplayObject.currentData[MovieDisplayObject.tableView.selectedRow]
         
         //Places the values from the selected movie onto the various views
         //Details View
@@ -120,7 +120,7 @@ class MovieMetadataWindow: NSWindow {
     
     @IBAction func OkButtonPressed(_ sender: Any) {
         //Store values
-        let aMovie = MovieDisplayObject.movieData[MovieDisplayObject.tableView.selectedRow]
+        let aMovie = MovieDisplayObject.currentData[MovieDisplayObject.tableView.selectedRow]
         aMovie.title = titleTextField.stringValue
         aMovie.director = directorTextField.stringValue
         aMovie.genre = genereTextField.stringValue

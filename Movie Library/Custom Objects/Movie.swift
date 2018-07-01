@@ -28,12 +28,14 @@ class Movie: NSObject, NSCoding {
     var width: String?
     var frameRate: String?
     var aspectRatio: String?
+    let uniqueID: String
 
     
     init(aTitle: String, aFilepath: URL) {
         title = aTitle
         filepath = aFilepath
         playCount = 0
+        uniqueID = Hash.MD5(string: (aTitle + aFilepath.absoluteString + Date().timeIntervalSince1970.description)).base64EncodedString()
     }
     
     //Encoding fucntion for saving. Encode each object with a key for retervial
@@ -55,6 +57,7 @@ class Movie: NSObject, NSCoding {
         coder.encode(width, forKey: "width")
         coder.encode(frameRate, forKey: "frameRate")
         coder.encode(aspectRatio, forKey: "aspectRatio")
+        coder.encode(uniqueID, forKey: "uniqueID")
     }
     
     //Decode each individual object and then create a new object instance
@@ -76,6 +79,12 @@ class Movie: NSObject, NSCoding {
         self.width = aDecoder.decodeObject(forKey: "width") as? String
         self.frameRate = aDecoder.decodeObject(forKey: "frameRate") as? String
         self.aspectRatio = aDecoder.decodeObject(forKey: "aspectRatio") as? String
+        self.uniqueID = aDecoder.decodeObject(forKey: "uniqueID") as! String
+    }
+    
+    
+    override var description: String {
+        return title ?? "";
     }
     
     
