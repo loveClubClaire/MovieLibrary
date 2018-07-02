@@ -196,10 +196,24 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             MovieDisplayObject.showOrder = false
         }
         else if selectedRow > libItems.count && selectedRow < (playlistItems.count + groups.count + libItems.count){
-            MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = NSSortDescriptor(key:"order", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+            MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = NSSortDescriptor(key: "uniqueID", ascending: true, comparator: {
+                (obj1, obj2) -> ComparisonResult in
+                
+                let index1 = self.playlistItems[self.selectedRow-self.groups.count-self.libItems.count].contents.index(of: obj1 as! String)
+                let index2 = self.playlistItems[self.selectedRow-self.groups.count-self.libItems.count].contents.index(of: obj2 as! String)
+                print(String(index1!) + " , " + String(index2!))
+                if index1! < index2!{
+                    return ComparisonResult.orderedAscending
+                }
+                else if index1! > index2!{
+                    return ComparisonResult.orderedDescending
+                }
+                return ComparisonResult.orderedSame
+            })
+            
             MovieDisplayObject.tableView.tableColumns[0].width = 45
             MovieDisplayObject.showOrder = true
         }
     }
-
+    
 }

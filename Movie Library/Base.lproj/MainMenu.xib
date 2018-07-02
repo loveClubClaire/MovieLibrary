@@ -124,7 +124,8 @@
                                     <action selector="runPageLayout:" target="-1" id="Din-rz-gC5"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
+                            <menuItem title="Print…" id="aTl-1u-JFS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="print:" target="-1" id="qaZ-4w-aoO"/>
                                 </connections>
@@ -704,6 +705,17 @@ CA
                                 <connections>
                                     <action selector="editMovieMenuItemSelected:" target="Voe-Tx-rLC" id="H6Q-5X-ru3"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Add Playlist" keyEquivalent="p" id="zje-u5-XlH">
+                                <connections>
+                                    <action selector="addPlaylistMenuItemSelected:" target="Voe-Tx-rLC" id="fPw-fh-8Qn"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete Playlist" id="M2G-U5-Ear">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                             </menuItem>
                         </items>
                     </menu>

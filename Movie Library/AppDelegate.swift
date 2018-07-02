@@ -93,5 +93,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    @IBAction func addPlaylistMenuItemSelected(_ sender: Any){
+        SidebarView.playlistItems.append(SidebarMenuItem(name: "New Playlist", contents: []))
+        SidebarView.reloadData()
+    }
+    
 }
 

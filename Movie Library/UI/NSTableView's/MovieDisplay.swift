@@ -216,8 +216,14 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
                 }
                 
                 for index in (0...tempPlaylist.count-1){
-                    sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.insert(tempPlaylist[index], at: row)
-                    currentData.insert(tempCurrentData[index], at: row)
+                    if row < currentData.count{
+                        sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.insert(tempPlaylist[index], at: row)
+                        currentData.insert(tempCurrentData[index], at: row)
+                    }
+                    else{
+                        sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.append(tempPlaylist[index])
+                        currentData.append(tempCurrentData[index])
+                    }
                 }
                 
                 tableView.reloadData()
