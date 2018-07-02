@@ -11,11 +11,11 @@ import Cocoa
 class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate {
 
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
+    lazy var appDelegate = NSApplication.shared.delegate as! AppDelegate
     
     let groups = ["Library", "Playlists"]
     let libItems = [SidebarMenuItem(name: "Movies", contents: []),SidebarMenuItem(name: "Recently Added", contents: [])]
     var playlistItems : [SidebarMenuItem] = []
-    
     
     func viewDidLoad() {
         // Do view setup here.
@@ -143,7 +143,6 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             }
         }
         
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         NSKeyedArchiver.archiveRootObject(self.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
         return true
     }
@@ -190,6 +189,17 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     //Called when a new row is being selected
     func outlineViewSelectionIsChanging(_ notification: Notification) {
         updateMovieDisplayDataSource()
+        let selectedRow = self.selectedRow
+        if selectedRow >= 1 && selectedRow < libItems.count{
+            MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = nil
+            MovieDisplayObject.tableView.tableColumns[0].width = 20
+            MovieDisplayObject.showOrder = false
+        }
+        else if selectedRow > libItems.count && selectedRow < (playlistItems.count + groups.count + libItems.count){
+            MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = NSSortDescriptor(key:"order", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+            MovieDisplayObject.tableView.tableColumns[0].width = 45
+            MovieDisplayObject.showOrder = true
+        }
     }
 
 }

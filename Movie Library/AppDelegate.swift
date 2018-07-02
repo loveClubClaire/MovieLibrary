@@ -88,7 +88,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func editMovieMenuItemSelected(_ sender: Any) {
-        MetadataWindow.spawnMovieMetadataWindow()
+        if MovieDisplayObject.tableView.selectedRow != -1{
+            MetadataWindow.spawnMovieMetadataWindow()
+        }
     }
     
 }

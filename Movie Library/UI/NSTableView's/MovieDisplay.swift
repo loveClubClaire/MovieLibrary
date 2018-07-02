@@ -11,9 +11,12 @@ import Cocoa
 class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
 
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var sidebarView: SidebarOutlineView!
+    lazy var appDelegate = NSApplication.shared.delegate as! AppDelegate
     
     var movieData: [String : Movie] = [:]
     var currentData: [Movie] = []
+    var showOrder = false
     
     //Called by AppDelegate after application has finished launching. Think of this function as an initalization function
     func viewDidLoad(){
@@ -34,8 +37,13 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         
         var cellView: NSTableCellView?
 
-        
-        if identifier == "title" {
+        if identifier == "order" {
+            if showOrder{
+                cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "OrderCell"), owner: nil) as? NSTableCellView)!
+                cellView!.textField?.stringValue = String(row+1)
+            }
+        }
+        else if identifier == "title" {
             cellView = (tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TitleCell"), owner: nil) as? NSTableCellView)!
             cellView!.textField?.stringValue = currentData[row].title ?? ""
         }
@@ -106,6 +114,15 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         tableView.reloadData()
     }
     
+    func tableView(_ tableView: NSTableView, shouldReorderColumn columnIndex: Int, toColumn newColumnIndex: Int) -> Bool {
+        if(columnIndex == 0 || newColumnIndex == 0){
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
     @IBAction func TableViewClicked(_ sender: Any) {
         if tableView.selectedRowIndexes.isEmpty {
             //TODO disable edit and delete menu items
@@ -171,6 +188,11 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
             source === tableView
             else { return [] }
     
+        //If the selected sidebar row is not a playlist, do not allow the items to be dropped on the tableview
+        if sidebarView.selectedRow <= sidebarView.libItems.count {
+            return []
+        }
+        
         //If the dragged items are attemting to be dropped above or below other items in the tableview, then we return an NSDragOperation, which displays to the use the option to drop the dragged items. If the dragged items are attemping to be dropped on an existing item, we return an empty array and the drop option is not displayed
         if dropOperation == .above {
             return .move
@@ -182,8 +204,27 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         let pb = info.draggingPasteboard()
         if let itemData = pb.pasteboardItems?.first?.data(forType: NSPasteboard.PasteboardType(rawValue: "movie.data")), let indexes = NSKeyedUnarchiver.unarchiveObject(with: itemData) as? IndexSet{
-
-            return true
+            
+            let consecutive = indexes.contains(integersIn: indexes.first!...indexes.last!)
+            if !(consecutive && indexes.contains(row-1)){
+                var tempPlaylist: [String] = []
+                var tempCurrentData: [Movie] = []
+                
+                for index in indexes.reversed(){
+                    tempPlaylist.append(sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.remove(at: index))
+                    tempCurrentData.append(currentData.remove(at: index))
+                }
+                
+                for index in (0...tempPlaylist.count-1){
+                    sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.insert(tempPlaylist[index], at: row)
+                    currentData.insert(tempCurrentData[index], at: row)
+                }
+                
+                tableView.reloadData()
+                NSKeyedArchiver.archiveRootObject(sidebarView.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
+                return true
+            }
+            return false
         }
         return false
     }
