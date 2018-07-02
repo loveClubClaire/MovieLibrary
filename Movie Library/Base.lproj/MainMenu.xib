@@ -716,6 +716,9 @@ CA
 CA
 </string>
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                <connections>
+                                    <action selector="deletePlaylistMenuItemSelected:" target="Voe-Tx-rLC" id="KYM-QL-Llc"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

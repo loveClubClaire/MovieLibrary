@@ -162,6 +162,9 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
                 if title == groups[0] || title == groups[1]{
                     textField.textColor = NSColor.gray
                 }
+                else{
+                    textField.textColor = NSColor.black
+                }
         }
             
             

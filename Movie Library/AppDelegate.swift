@@ -96,6 +96,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func addPlaylistMenuItemSelected(_ sender: Any){
         SidebarView.playlistItems.append(SidebarMenuItem(name: "New Playlist", contents: []))
         SidebarView.reloadData()
+        NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
+    }
+    
+    @IBAction func deletePlaylistMenuItemSelected(_ sender: Any){
+        let selectedRow = SidebarView.selectedRow
+        if selectedRow > SidebarView.libItems.count{
+            SidebarView.playlistItems.remove(at: selectedRow-SidebarView.groups.count-SidebarView.libItems.count)
+            SidebarView.reloadData()
+            NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
+        }
     }
     
 }
