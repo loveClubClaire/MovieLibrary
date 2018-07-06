@@ -210,18 +210,19 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
                 var tempPlaylist: [String] = []
                 var tempCurrentData: [Movie] = []
                 
+                let selectedPlaylist = sidebarView.getSelectedItem()
                 for index in indexes.reversed(){
-                    tempPlaylist.append(sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.remove(at: index))
+                    tempPlaylist.append(selectedPlaylist.contents.remove(at: index))
                     tempCurrentData.append(currentData.remove(at: index))
                 }
                 
                 for index in (0...tempPlaylist.count-1){
                     if row < currentData.count{
-                        sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.insert(tempPlaylist[index], at: row)
+                        selectedPlaylist.contents.insert(tempPlaylist[index], at: row)
                         currentData.insert(tempCurrentData[index], at: row)
                     }
                     else{
-                        sidebarView.playlistItems[sidebarView.selectedRow-sidebarView.groups.count-sidebarView.libItems.count].contents.append(tempPlaylist[index])
+                        selectedPlaylist.contents.append(tempPlaylist[index])
                         currentData.append(tempCurrentData[index])
                     }
                 }

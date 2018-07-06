@@ -173,10 +173,9 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             //Get the raw data from the given pasteboard assoicated with the movie.data pasteboard type and convert that data to a Swift object
             //The data will unarchive into an NSIndexSet
             let selectedMovies = NSKeyedUnarchiver.unarchiveObject(with: info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType(rawValue: "movie.data"))!)
-            let droppedRowIndex = self.row(forItem: item)
             //For every selected index in the MovieDisplayTableView, get the uniqueID of the movie item and append it to the playlist where the selected items are being dropped
             for index in selectedMovies as! NSIndexSet{
-               playlistItems[droppedRowIndex-groups.count-libItems.count].contents.append(MovieDisplayObject.currentData[index].uniqueID)
+                (item as! SidebarMenuItem).contents.append(MovieDisplayObject.currentData[index].uniqueID)
             }
         }
         else if((info.draggingPasteboard().types![0]).rawValue == "sidebar.data"){
@@ -272,7 +271,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     //MARK: NSTextFieldDelegate
     override func controlTextDidEndEditing(_ obj: Notification) {
         let textField = obj.object as! NSTextField
-        playlistItems[selectedRow-groups.count-libItems.count].name = textField.stringValue
+        getSelectedItem().name = textField.stringValue
         NSKeyedArchiver.archiveRootObject(self.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
     }
     
