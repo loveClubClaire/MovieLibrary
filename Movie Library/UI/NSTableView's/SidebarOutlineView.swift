@@ -57,7 +57,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         }
     }
     
-    //NSOutlineView
+    //MARK: NSOutlineView
     //
 //    override func frameOfCell(atColumn column: Int, row: Int) -> NSRect {
 //        let superFrame = super.frameOfCell(atColumn: column, row: row)
@@ -67,7 +67,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
 //        return superFrame
 //    }
     
-    //NSOutlineViewDataSource
+    //MARK: NSOutlineViewDataSource
     
     // Number of items in the sidebar
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
@@ -82,13 +82,15 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     // Items to be added to sidebar
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        
         if item as? String == groups[0]{
-            return libItems[index].name
+            return libItems[index]
         }
         else if item as? String == groups[1]{
-            return playlistItems[index].name
+            return playlistItems[index]
         }
         return groups[index]
+        
     }
     
     // Whether rows are expandable by an arrow
@@ -110,27 +112,39 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     //Drag and drop methods
     //Returns an NSPasteboardItem with the selected data to be dragged and dropped somewhere else
     func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
-        return NSPasteboardItem()
+        
+        //Get the rows selected in this tableview and convert them to raw data
+        let data = NSKeyedArchiver.archivedData(withRootObject: self.selectedRow - groups.count-libItems.count)
+        let item = NSPasteboardItem()
+        //Add row data to NSPasteboardItem with a unique type identifer
+        if(self.selectedRow > libItems.count){
+            item.setData(data, forType: NSPasteboard.PasteboardType(rawValue: "sidebar.data"))
+        }
+        return item
     }
     
     //Determines if the currently dragged rows can be dropped in a specific location. Returns a NSDragOperation to indicate if items can be dragged to the specific location
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+
         //The index parameter represents where we are attempting to drop our dragged items. It is NOT the index of the NSOutlineView, rather it indicates if we are dropping between items, on top of items, or something else of that nature. More like an enum than an index.
         //An index of -1 indicates we are attempting to drop onto an existing item
         //If we are attempting to drop onto an existing item and that item isn't one of the group indicators and the item isn't null, then we return an NSDrag operation allowing us do the drop. Otherwise we return an empty array which prevents the drop
-        if(index == -1 && item as? String != groups[0] && item as? String != groups[1] && item != nil){
-            return NSDragOperation.move
+        if((info.draggingPasteboard().types![0]).rawValue == "movie.data"){
+            
+            if(index == -1 && ((item as? String) == nil) && item != nil){
+                return NSDragOperation.move
+            }
         }
-        else{
-            return []
+        else if (info.draggingPasteboard().types![0]).rawValue == "sidebar.data"{
+            if index != -1 && item as? String == groups[1] {
+                return NSDragOperation.move
+            }
         }
-        
-        
+        return []
     }
     
     //Is called after a drop takes placed. Used to update all necessary data structures
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
- 
         //If the sidebar is receiving movie data
         if((info.draggingPasteboard().types![0]).rawValue == "movie.data"){
             //Get the raw data from the given pasteboard assoicated with the movie.data pasteboard type and convert that data to a Swift object
@@ -142,6 +156,17 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
                playlistItems[droppedRowIndex-groups.count-libItems.count].contents.append(MovieDisplayObject.currentData[index].uniqueID)
             }
         }
+        else if((info.draggingPasteboard().types![0]).rawValue == "sidebar.data"){
+            let selectedIndex = NSKeyedUnarchiver.unarchiveObject(with: info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType(rawValue: "sidebar.data"))!)
+            let playlist = playlistItems.remove(at: selectedIndex as! Int)
+            if index > selectedIndex as! Int{
+                playlistItems.insert(playlist, at: index-1)
+            }
+            else{
+                playlistItems.insert(playlist, at: index)
+            }
+            self.reloadData()
+        }
         
         NSKeyedArchiver.archiveRootObject(self.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
         return true
@@ -150,25 +175,20 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     
     
-   //NSOutlineViewDelegate
+    
+    //MARK: NSOutlineViewDelegate
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         var view: NSTableCellView?
+        view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ItemCell"), owner: self) as? NSTableCellView
         
-        if let title = item as? String {
-            view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ItemCell"), owner: self) as? NSTableCellView
-            
-            if let textField = view?.textField {
-                 textField.stringValue = title
-                if title == groups[0] || title == groups[1]{
-                    textField.textColor = NSColor.gray
-                }
-                else{
-                    textField.textColor = NSColor.black
-                }
-        }
-            
-            
-            
+        if let textField = view?.textField {
+            if let menuItem = item as? SidebarMenuItem {
+                textField.stringValue = menuItem.name
+            }
+            else if let menuItem = item as? String{
+                textField.stringValue = menuItem
+                textField.textColor = NSColor.gray
+            }
         }
         
         return view
@@ -176,7 +196,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     //Prevent specific rows in the NSOutlineView from being selected
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool{
-        if item as? String == groups[0] || item as? String == groups[1]{
+        if let _ = item as? String{
             return false
         }
         else{
