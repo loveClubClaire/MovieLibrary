@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate{
 
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
     lazy var appDelegate = NSApplication.shared.delegate as! AppDelegate
@@ -82,7 +82,6 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     // Items to be added to sidebar
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        
         if item as? String == groups[0]{
             return libItems[index]
         }
@@ -177,6 +176,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     
     //MARK: NSOutlineViewDelegate
+    lazy var lastGroup = groups[0]
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         var view: NSTableCellView?
         view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "ItemCell"), owner: self) as? NSTableCellView
@@ -184,10 +184,17 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         if let textField = view?.textField {
             if let menuItem = item as? SidebarMenuItem {
                 textField.stringValue = menuItem.name
+              
+                if lastGroup == groups[1]{
+                    textField.isEditable = true
+                    textField.delegate = self
+                }
+
             }
             else if let menuItem = item as? String{
                 textField.stringValue = menuItem
                 textField.textColor = NSColor.gray
+                lastGroup = menuItem
             }
         }
         
@@ -237,6 +244,13 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             MovieDisplayObject.tableView.tableColumns[0].width = 45
             MovieDisplayObject.showOrder = true
         }
+    }
+    
+    //MARK: NSTextFieldDelegate
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        let textField = obj.object as! NSTextField
+        playlistItems[selectedRow-groups.count-libItems.count].name = textField.stringValue
+        NSKeyedArchiver.archiveRootObject(self.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
     }
     
 }
