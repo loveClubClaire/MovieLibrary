@@ -28,30 +28,54 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         self.selectRowIndexes(IndexSet.init(integer: 1), byExtendingSelection: false)
     }
     
-    //Updates the MovieDisplay data source to contain only the items in the selected sidebar row
-    //Function should have a O(n log n)
-    func updateMovieDisplayDataSource(){
-        //Get the selected sidebarrow
+    
+    func playlistSelected() -> Bool{
+        //Get the selected sidebar row
         let selectedRow = self.selectedRow
         //Index 0 is a group (the library group) which can not be selected. So if the selected row is between 1 and libItems.count, the the selected row is in the Library group and resides in the libItems array
         if selectedRow >= 1 && selectedRow < libItems.count{
-            //All items in the Library group display all movies, so we get all of the values from the movieData dictionary and place them in an array. We then make that array the datasource for the MovieDisplayObject and reload the tableview
-            let arrayFromMovieData = Array(MovieDisplayObject.movieData.values.map{$0})
-            MovieDisplayObject.currentData = arrayFromMovieData
-            MovieDisplayObject.tableView.reloadData()
-            
+            return false
         }
         //If the selectedRow is greater than libItems.count, we know the selectedRow isn't in the Library group. Checking if its less than the sum of all three sidebar row arrays is a bounds check, which shouldn't ever fail.
         else if selectedRow > libItems.count && selectedRow < (playlistItems.count + groups.count + libItems.count){
+            return true
+        }
+        return false
+    }
+    
+    func getSelectedItem() -> SidebarMenuItem{
+        var toReturn: SidebarMenuItem
+        if playlistSelected(){
+            toReturn = playlistItems[self.selectedRow-groups.count-libItems.count]
+        }
+        else{
+            toReturn = libItems[self.selectedRow-1]
+        }
+        return toReturn
+    }
+    
+
+    
+    //Updates the MovieDisplay data source to contain only the items in the selected sidebar row
+    //Function should have a O(n log n)
+    func updateMovieDisplayDataSource(){
+        if playlistSelected(){
             var arrayFromMovieData : [Movie] = []
             //Iterate over every uniqueID stored in the selected row. We know we're in the playlist group, so we get the contents of the playlist from the playlistItems array and do some subtraction to convert the selected row into the coresponding playlistItem index.
             //For each uniqueID in a playlist, we get the assoicated Movie object from the movieData library and appened it to an array
-            for uniqueID in playlistItems[selectedRow-groups.count-libItems.count].contents{
+            let selectedItem = getSelectedItem()
+            for uniqueID in selectedItem.contents{
                 if let movieObject = MovieDisplayObject.movieData[uniqueID]{
                     arrayFromMovieData.append(movieObject)
                 }
             }
             //With the generated array of movie items, we make it the current data array and then reload the table view.
+            MovieDisplayObject.currentData = arrayFromMovieData
+            MovieDisplayObject.tableView.reloadData()
+        }
+        else{
+            //All items in the Library group display all movies, so we get all of the values from the movieData dictionary and place them in an array. We then make that array the datasource for the MovieDisplayObject and reload the tableview
+            let arrayFromMovieData = Array(MovieDisplayObject.movieData.values.map{$0})
             MovieDisplayObject.currentData = arrayFromMovieData
             MovieDisplayObject.tableView.reloadData()
         }
@@ -219,13 +243,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     //Called when a new row is being selected
     func outlineViewSelectionIsChanging(_ notification: Notification) {
         updateMovieDisplayDataSource()
-        let selectedRow = self.selectedRow
-        if selectedRow >= 1 && selectedRow < libItems.count{
-            MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = nil
-            MovieDisplayObject.tableView.tableColumns[0].width = 20
-            MovieDisplayObject.showOrder = false
-        }
-        else if selectedRow > libItems.count && selectedRow < (playlistItems.count + groups.count + libItems.count){
+        if playlistSelected(){
             MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = NSSortDescriptor(key: "uniqueID", ascending: true, comparator: {
                 (obj1, obj2) -> ComparisonResult in
                 
@@ -243,6 +261,11 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             
             MovieDisplayObject.tableView.tableColumns[0].width = 45
             MovieDisplayObject.showOrder = true
+        }
+        else{
+            MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = nil
+            MovieDisplayObject.tableView.tableColumns[0].width = 20
+            MovieDisplayObject.showOrder = false
         }
     }
     

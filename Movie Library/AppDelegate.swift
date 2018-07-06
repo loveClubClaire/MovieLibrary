@@ -66,24 +66,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func deleteMovieMenuItemSelected(_ sender: Any) {
-        
-         //Index 0 is a group (the library group) which can not be selected. So if the selected row is between 1 and libItems.count, the the selected row is in the Library group and resides in the libItems array
-        if SidebarView.selectedRow >= 1 && SidebarView.selectedRow < SidebarView.libItems.count{
+        if SidebarView.playlistSelected(){
+            let selectedPlaylist = SidebarView.getSelectedItem()
+            MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{
+                selectedPlaylist.contents.remove(at: $0)
+                MovieDisplayObject.currentData.remove(at: $0)
+            }
+            NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
+        }
+        else{
             MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{
                 let removedItem = MovieDisplayObject.currentData.remove(at: $0)
                 MovieDisplayObject.movieData.removeValue(forKey: removedItem.uniqueID)
             }
             NSKeyedArchiver.archiveRootObject(MovieDisplayObject.movieData, toFile: storedMoviesFilepath)
         }
-        //If the selectedRow is greater than libItems.count, we know the selectedRow isn't in the Library group.
-        else{
-            MovieDisplayObject.tableView.selectedRowIndexes.reversed().forEach{
-                SidebarView.playlistItems[SidebarView.selectedRow-SidebarView.groups.count-SidebarView.libItems.count].contents.remove(at: $0)
-                MovieDisplayObject.currentData.remove(at: $0)
-            }
-             NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
-        }
-        
+    
         MovieDisplayObject.tableView.reloadData()
     }
     
@@ -100,9 +98,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func deletePlaylistMenuItemSelected(_ sender: Any){
-        let selectedRow = SidebarView.selectedRow
-        if selectedRow > SidebarView.libItems.count{
-            SidebarView.playlistItems.remove(at: selectedRow-SidebarView.groups.count-SidebarView.libItems.count)
+        if SidebarView.playlistSelected(){
+            SidebarView.playlistItems.remove(at: SidebarView.playlistItems.index(of: SidebarView.getSelectedItem())!)
             SidebarView.reloadData()
             NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
         }
