@@ -15,6 +15,7 @@
         <customObject id="GD9-0p-DSE" customClass="MovieDisplay" customModule="Movie_Library" customModuleProvider="target">
             <connections>
                 <outlet property="sidebarView" destination="MuL-oB-yS8" id="N6M-iw-cOc"/>
+                <outlet property="tableMenu" destination="p4P-qt-ORY" id="1rk-Qh-rkh"/>
                 <outlet property="tableView" destination="x8t-Bf-Qhr" id="mZW-pg-pAW"/>
             </connections>
         </customObject>

@@ -12,6 +12,7 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var sidebarView: SidebarOutlineView!
+    @IBOutlet weak var tableMenu: NSMenu!
     lazy var appDelegate = NSApplication.shared.delegate as! AppDelegate
     
     var movieData: [String : Movie] = [:]
@@ -25,6 +26,23 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         tableView.autosaveTableColumns = true
         //Registers the pasteboard types that the view will accept as the destination of an image-dragging session.
         tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data")])
+        //Set the apperiance of the order column
+        tableView.tableColumns[0].sortDescriptorPrototype = nil
+        tableView.tableColumns[0].width = 20
+        //
+        for column in tableView.tableColumns{
+            let menuItem = tableMenu.item(withTitle: column.title)
+            if menuItem != nil{
+                if column.isHidden{
+                    menuItem?.state = .off
+                }
+                else{
+                    menuItem?.state = .on
+                }
+            }
+            
+        }
+        
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -190,6 +208,11 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
     
         //If the selected sidebar row is not a playlist, do not allow the items to be dropped on the tableview
         if sidebarView.selectedRow <= sidebarView.libItems.count {
+            return []
+        }
+        
+        //If the selected column is not the order column, do not allow items to be dropped on the table view
+        if tableView.selectedColumn != 0{
             return []
         }
         
