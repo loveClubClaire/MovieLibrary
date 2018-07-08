@@ -26,6 +26,7 @@
 		C0464D9120D750DD006C984D /* MediaInfoKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0464D8D20D74F14006C984D /* MediaInfoKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C04DE2A920E83649001C64C6 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE2A820E83649001C64C6 /* Hash.swift */; };
 		C04DE2AD20E99B96001C64C6 /* SidebarMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE2AC20E99B96001C64C6 /* SidebarMenuItem.swift */; };
+		C071E43F20F294FE0038257F /* CustomSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C071E43E20F294FE0038257F /* CustomSplitView.swift */; };
 		C0E6848620DEB04B0050EAD7 /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6848420DEB04B0050EAD7 /* SidebarOutlineView.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		C0464D8820D74F14006C984D /* MediaInfoKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaInfoKit.xcodeproj; path = MediaInfoKit/MediaInfoKit.xcodeproj; sourceTree = "<group>"; };
 		C04DE2A820E83649001C64C6 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
 		C04DE2AC20E99B96001C64C6 /* SidebarMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SidebarMenuItem.swift; path = "Movie Library/Custom Objects/SidebarMenuItem.swift"; sourceTree = SOURCE_ROOT; };
+		C071E43E20F294FE0038257F /* CustomSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSplitView.swift; sourceTree = "<group>"; };
 		C0E6848420DEB04B0050EAD7 /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 			children = (
 				C0464C5320D1D05C006C984D /* NSTableView's */,
 				C0464C5D20D23083006C984D /* MovieMetadataWindow.swift */,
+				C071E43E20F294FE0038257F /* CustomSplitView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				C0464C8F20D373B2006C984D /* NSImage+Extention.swift in Sources */,
 				C0464C5C20D209D3006C984D /* MenuBar.swift in Sources */,
 				C04DE2A920E83649001C64C6 /* Hash.swift in Sources */,
+				C071E43F20F294FE0038257F /* CustomSplitView.swift in Sources */,
 				C0464C5A20D2052E006C984D /* Movie.swift in Sources */,
 				C0464CFC20D40518006C984D /* DragDropDemoAppDelegate.m in Sources */,
 				C0E6848620DEB04B0050EAD7 /* SidebarOutlineView.swift in Sources */,

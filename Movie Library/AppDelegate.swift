@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var MovieDisplayObject: MovieDisplay!
     @IBOutlet weak var MetadataWindow: MovieMetadataWindow!
     @IBOutlet weak var SidebarView: SidebarOutlineView!
+    @IBOutlet weak var SplitView: CustomSplitView!
     
     @IBOutlet weak var window: NSWindow!
 
@@ -42,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
   
-        
+        SplitView.viewDidLoad()
         SidebarView.viewDidLoad()
         MovieDisplayObject.viewDidLoad()
         SidebarView.updateMovieDisplayDataSource()
