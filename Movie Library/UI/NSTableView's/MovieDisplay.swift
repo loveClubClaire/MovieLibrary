@@ -41,8 +41,7 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
                 }
             }
         }
-        //Disable the 1px border included on the outline view by default
-        tableView.enclosingScrollView?.borderType = .noBorder
+
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

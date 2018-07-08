@@ -26,11 +26,6 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         self.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data"),NSPasteboard.PasteboardType(rawValue: "sidebar.data")])
         //Programatically selecting a default row
         self.selectRowIndexes(IndexSet.init(integer: 1), byExtendingSelection: false)
-        //Disable the 1px border included on the outline view by default 
-        self.enclosingScrollView?.borderType = .noBorder
-        
-        
-        print(self.backgroundColor)
     }
     
     

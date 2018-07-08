@@ -1382,17 +1382,30 @@ Gw
                                                     <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderType">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </scrollView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="lU6-eo-EsU">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="34"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d2h-0Q-04Q">
-                                                        <rect key="frame" x="0.0" y="-1" width="34" height="36"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kAe-va-YhW">
+                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="kAe-va-YhW">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="addPlaylistMenuItemSelected:" target="Voe-Tx-rLC" id="NTJ-Zi-hfd"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -2040,6 +2053,11 @@ Gw
                                                         <outlet property="menu" destination="p4P-qt-ORY" id="2w9-y2-LUv"/>
                                                     </connections>
                                                 </tableHeaderView>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderType">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </scrollView>
                                         </subviews>
                                         <constraints>
