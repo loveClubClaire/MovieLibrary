@@ -29,7 +29,7 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         //Set the apperiance of the order column
         tableView.tableColumns[0].sortDescriptorPrototype = nil
         tableView.tableColumns[0].width = 20
-        //
+        //Iterate over every column in the table view and if they are visable, make the coresponding NSMenuItem selected
         for column in tableView.tableColumns{
             let menuItem = tableMenu.item(withTitle: column.title)
             if menuItem != nil{
@@ -40,9 +40,9 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
                     menuItem?.state = .on
                 }
             }
-            
         }
-        
+        //Disable the 1px border included on the outline view by default
+        tableView.enclosingScrollView?.borderType = .noBorder
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

@@ -12,6 +12,8 @@ class CustomSplitView: NSSplitView, NSSplitViewDelegate {
 
     func viewDidLoad(){
         delegate = self
+        //Set a unique autosave name so the configuration of the colums persist over app launches
+        self.autosaveName = NSSplitView.AutosaveName(rawValue: "CustomSplitViewSave")
     }
     
     func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool{
