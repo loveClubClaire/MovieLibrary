@@ -1305,7 +1305,7 @@ Gw
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="Buv-oo-JwE">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="524"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SGV-50-5VY" customClass="CustomSplitView" customModule="Movie_Library" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="524"/>
@@ -1317,17 +1317,17 @@ Gw
                                     <view translatesAutoresizingMaskIntoConstraints="NO" id="SLD-tF-cl1">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="524"/>
                                         <subviews>
-                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaC-YO-Sc9">
+                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaC-YO-Sc9">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="524"/>
-                                                <clipView key="contentView" id="Iul-ZM-Zba">
+                                                <clipView key="contentView" drawsBackground="NO" id="Iul-ZM-Zba">
                                                     <rect key="frame" x="1" y="1" width="148" height="522"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="oZg-zl-E7Z" id="6gM-Ux-GEB" customClass="SidebarOutlineView" customModule="Movie_Library" customModuleProvider="target">
+                                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="oZg-zl-E7Z" id="6gM-Ux-GEB" customClass="SidebarOutlineView" customModule="Movie_Library" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="148" height="522"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <size key="intercellSpacing" width="3" height="2"/>
-                                                            <color key="backgroundColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                                            <size key="intercellSpacing" width="2" height="3"/>
+                                                            <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
                                                                 <tableColumn identifier="ItemCell" width="145" minWidth="40" maxWidth="1000" id="oZg-zl-E7Z">
@@ -1369,10 +1369,12 @@ Gw
                                                                 </tableColumn>
                                                             </tableColumns>
                                                             <connections>
+                                                                <action trigger="doubleAction" selector="doubleClick:" target="-1" id="ce1-LL-2ca"/>
                                                                 <outlet property="MovieDisplayObject" destination="GD9-0p-DSE" id="UDV-26-nEs"/>
                                                             </connections>
                                                         </outlineView>
                                                     </subviews>
+                                                    <nil key="backgroundColor"/>
                                                 </clipView>
                                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="RvP-RR-w31">
                                                     <rect key="frame" x="1" y="507" width="148" height="16"/>
@@ -1415,7 +1417,7 @@ Gw
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="wantsLayer" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="opaque" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                        <color key="value" red="0.8626509309" green="0.86279940610000005" blue="0.86264163260000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </customView>
@@ -2042,7 +2044,7 @@ Gw
                                                     <rect key="frame" x="1" y="507" width="647" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
-                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="ulU-9j-abF">
+                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ulU-9j-abF">
                                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>

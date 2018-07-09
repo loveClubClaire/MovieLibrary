@@ -26,7 +26,10 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         self.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "movie.data"),NSPasteboard.PasteboardType(rawValue: "sidebar.data")])
         //Programatically selecting a default row
         self.selectRowIndexes(IndexSet.init(integer: 1), byExtendingSelection: false)
+        setRowColour(self, true)
     }
+    
+    
     
     
     func playlistSelected() -> Bool{
@@ -54,8 +57,6 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         return toReturn
     }
     
-
-    
     //Updates the MovieDisplay data source to contain only the items in the selected sidebar row
     //Function should have a O(n log n)
     func updateMovieDisplayDataSource(){
@@ -81,15 +82,80 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         }
     }
     
+    //Cribbed from https://github.com/KinematicSystems/NSOutlineViewReorder
+    //Added in calls to setRowTextColor, changed the colors of the rows, and added some project specific conditions
+    func setRowColour(_ outlineView: NSOutlineView, _ windowFocused: Bool) {
+        let rows = IndexSet(integersIn: 0..<outlineView.numberOfRows)
+        let rowViews = rows.compactMap { outlineView.rowView(atRow: $0, makeIfNecessary: false) }
+        var initialLoad = true
+        
+        // Iterate over each row in the outlineView
+        for (index, rowView) in rowViews.enumerated() {
+            if rowView.isSelected {
+                initialLoad = false
+            }
+            
+            if windowFocused && rowView.isSelected {
+                rowView.backgroundColor = NSColor(red:0.07, green:0.42, blue:0.86, alpha:1.0)
+                setRowTextColor(index: index,textColor: NSColor.white)
+            } else if rowView.isSelected {
+                rowView.backgroundColor = NSColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)
+                setRowTextColor(index: index,textColor: NSColor.black)
+            } else {
+                rowView.backgroundColor = .clear
+                if index != 0 && index != libItems.count+1{
+                    setRowTextColor(index: index,textColor: NSColor.black)
+                }
+            }
+        }
+        //Won't work if there is no selected row (selectedRow == -1) but because the inital load occurs AFTER the window is loaded (because that's when this classes viewDidLoad method is called) I don't expect this to ever happen
+        if initialLoad {
+            self.rowView(atRow: self.selectedRow, makeIfNecessary: true)?.backgroundColor = NSColor(red:0.07, green:0.42, blue:0.86, alpha:1.0)
+            setRowTextColor(index: self.selectedRow,textColor: NSColor.white)
+        }
+    }
+    
+    func setRowTextColor(index: Int, textColor: NSColor){
+        let view = self.view(atColumn: 0, row: index, makeIfNecessary: false) as? NSTableCellView
+        let textField = view?.textField
+        textField?.textColor = textColor
+    }
+    
     //MARK: NSOutlineView
-    //
-//    override func frameOfCell(atColumn column: Int, row: Int) -> NSRect {
-//        let superFrame = super.frameOfCell(atColumn: column, row: row)
-//        if column == 0{
-//            return NSMakeRect(0, superFrame.origin.y, self.bounds.size.width, superFrame.size.height)
-//        }
-//        return superFrame
-//    }
+    //Override the observeValue function defined in the NSOutlineView class. Whenever the first responder changes this method is called. We make a call to setRowColour whenever the outline view gains or looses first responder status, passing different parameters to setRowColour to provide different row colorings depending of if the row is or is not the first responder
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
+        super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        if self.window?.firstResponder == self {
+            if self.selectedRow != -1{
+               setRowColour(self, true)
+            }
+        }
+        else{
+            if self.selectedRow != -1{
+                setRowColour(self, false)
+            }
+        }
+    }
+    
+    override func keyDown(with anEvent: NSEvent) {
+        if anEvent.keyCode == 36{
+            let view = self.view(atColumn: 0, row: self.selectedRow, makeIfNecessary: false) as? NSTableCellView
+            let textField = view?.textField
+            textField?.isEditable = true
+            textField?.selectText(self)
+        }
+        else{
+            super.keyDown(with: anEvent)
+        }
+        
+        
+    }
+    @IBAction func doubleClick(_ sender: Any) {
+        let view = self.view(atColumn: 0, row: self.selectedRow, makeIfNecessary: false) as? NSTableCellView
+        let textField = view?.textField
+        textField?.isEditable = true
+        textField?.selectText(self)
+    }
     
     //MARK: NSOutlineViewDataSource
     
@@ -207,16 +273,16 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         if let textField = view?.textField {
             if let menuItem = item as? SidebarMenuItem {
                 textField.stringValue = menuItem.name
+                textField.textColor = .black
               
                 if lastGroup == groups[1]{
-                    textField.isEditable = true
                     textField.delegate = self
                 }
 
             }
             else if let menuItem = item as? String{
                 textField.stringValue = menuItem
-                textField.textColor = NSColor.gray
+                textField.textColor = .gray
                 lastGroup = menuItem
             }
         }
@@ -241,6 +307,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     //Called when a new row is being selected
     func outlineViewSelectionIsChanging(_ notification: Notification) {
+        setRowColour(self, true)
         updateMovieDisplayDataSource()
         if playlistSelected(){
             MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = NSSortDescriptor(key: "uniqueID", ascending: true, comparator: {
@@ -248,7 +315,7 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
                 
                 let index1 = self.playlistItems[self.selectedRow-self.groups.count-self.libItems.count].contents.index(of: obj1 as! String)
                 let index2 = self.playlistItems[self.selectedRow-self.groups.count-self.libItems.count].contents.index(of: obj2 as! String)
-                print(String(index1!) + " , " + String(index2!))
+                
                 if index1! < index2!{
                     return ComparisonResult.orderedAscending
                 }
@@ -273,6 +340,8 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         let textField = obj.object as! NSTextField
         getSelectedItem().name = textField.stringValue
         NSKeyedArchiver.archiveRootObject(self.playlistItems, toFile: appDelegate.storedPlaylistsFilepath)
+        textField.isEditable = false
     }
+    
     
 }

@@ -95,6 +95,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func addPlaylistMenuItemSelected(_ sender: Any){
         SidebarView.playlistItems.append(SidebarMenuItem(name: "New Playlist", contents: []))
         SidebarView.reloadData()
+        SidebarView.selectRowIndexes(IndexSet.init(integer: SidebarView.numberOfRows - 1), byExtendingSelection: false)
+        SidebarView.outlineViewSelectionIsChanging(Notification.init(name: NSOutlineView.selectionIsChangingNotification))
         NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
     }
     
@@ -102,6 +104,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if SidebarView.playlistSelected(){
             SidebarView.playlistItems.remove(at: SidebarView.playlistItems.index(of: SidebarView.getSelectedItem())!)
             SidebarView.reloadData()
+            SidebarView.outlineViewSelectionIsChanging(Notification.init(name: NSOutlineView.selectionIsChangingNotification))
             NSKeyedArchiver.archiveRootObject(SidebarView.playlistItems, toFile: storedPlaylistsFilepath)
         }
     }
