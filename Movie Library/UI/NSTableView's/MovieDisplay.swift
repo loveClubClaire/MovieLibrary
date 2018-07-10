@@ -211,7 +211,7 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
         }
         
         //If the selected column is not the order column, do not allow items to be dropped on the table view
-        if tableView.selectedColumn != 0{
+        if tableView.sortDescriptors[0].key != "uniqueID"{
             return []
         }
         
@@ -233,11 +233,14 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
                 var tempCurrentData: [Movie] = []
                 
                 let selectedPlaylist = sidebarView.getSelectedItem()
-                for index in indexes.reversed(){
-                    tempPlaylist.append(selectedPlaylist.contents.remove(at: index))
-                    tempCurrentData.append(currentData.remove(at: index))
-                }
+                let dummyMovie = Movie.init(aTitle: "", aFilepath: URL.init(fileURLWithPath: "/"))
                 
+                for index in indexes.reversed(){
+                    tempPlaylist.append(selectedPlaylist.contents[index])
+                    tempCurrentData.append(currentData[index])
+                    currentData[index] = dummyMovie
+                }
+
                 for index in (0...tempPlaylist.count-1){
                     if row < currentData.count{
                         selectedPlaylist.contents.insert(tempPlaylist[index], at: row)
@@ -246,6 +249,13 @@ class MovieDisplay: NSObject, NSTableViewDataSource, NSTableViewDelegate{
                     else{
                         selectedPlaylist.contents.append(tempPlaylist[index])
                         currentData.append(tempCurrentData[index])
+                    }
+                }
+                
+                for (index,movie) in currentData.enumerated().reversed(){
+                    if movie === dummyMovie{
+                        selectedPlaylist.contents.remove(at: index)
+                        currentData.remove(at: index)
                     }
                 }
                 
