@@ -263,9 +263,6 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     }
     
     
-    
-    
-    
     //MARK: NSOutlineViewDelegate
     lazy var lastGroup = groups[0]
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -329,6 +326,8 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             
             MovieDisplayObject.tableView.tableColumns[0].width = 45
             MovieDisplayObject.showOrder = true
+            MovieDisplayObject.tableView.sortDescriptors = [NSSortDescriptor(key: "uniqueID", ascending: true)]
+            MovieDisplayObject.tableView.selectColumnIndexes(IndexSet.init(integer: 0), byExtendingSelection: false)
         }
         else{
             MovieDisplayObject.tableView.tableColumns[0].sortDescriptorPrototype = nil
