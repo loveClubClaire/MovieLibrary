@@ -97,21 +97,21 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
             
             if windowFocused && rowView.isSelected {
                 rowView.backgroundColor = NSColor(red:0.07, green:0.42, blue:0.86, alpha:1.0)
-                setRowTextColor(index: index,textColor: NSColor.white)
+                setRowTextColor(index: index,textColor: .white)
             } else if rowView.isSelected {
                 rowView.backgroundColor = NSColor(red:0.87, green:0.87, blue:0.87, alpha:1.0)
-                setRowTextColor(index: index,textColor: NSColor.black)
+                setRowTextColor(index: index,textColor: .black)
             } else {
                 rowView.backgroundColor = .clear
                 if index != 0 && index != libItems.count+1{
-                    setRowTextColor(index: index,textColor: NSColor.black)
+                    setRowTextColor(index: index,textColor: .black)
                 }
             }
         }
         //Won't work if there is no selected row (selectedRow == -1) but because the inital load occurs AFTER the window is loaded (because that's when this classes viewDidLoad method is called) I don't expect this to ever happen
         if initialLoad {
             self.rowView(atRow: self.selectedRow, makeIfNecessary: true)?.backgroundColor = NSColor(red:0.07, green:0.42, blue:0.86, alpha:1.0)
-            setRowTextColor(index: self.selectedRow,textColor: NSColor.white)
+            setRowTextColor(index: self.selectedRow,textColor: .white)
         }
     }
     
@@ -219,9 +219,11 @@ class SidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         //An index of -1 indicates we are attempting to drop onto an existing item
         //If we are attempting to drop onto an existing item and that item isn't one of the group indicators and the item isn't null, then we return an NSDrag operation allowing us do the drop. Otherwise we return an empty array which prevents the drop
         if((info.draggingPasteboard().types![0]).rawValue == "movie.data"){
-            
             if(index == -1 && ((item as? String) == nil) && item != nil){
-                return NSDragOperation.move
+                if !libItems.contains(item as! SidebarMenuItem){
+                    self.selectionHighlightStyle = .regular
+                    return NSDragOperation.copy
+                }
             }
         }
         else if (info.draggingPasteboard().types![0]).rawValue == "sidebar.data"{
